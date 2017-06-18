@@ -68,6 +68,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     @IBAction func switchViews(_ sender: Any) {
         switch view_segmented_control.selectedSegmentIndex {
         case 0:
+            //USC latitude: 34.0220386047, USC longitude:-118.2858178101
             let camera = GMSCameraPosition.camera(withLatitude: 34.0220386047, longitude: -118.2858178101, zoom: 15.0)
             mapView.animate(to: camera)
         case 1:
@@ -193,6 +194,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
             
     }
     
+    //Set the default values back. Put all default code every search here (NOT INITIALIZATION)
     func set_default_values()
     {
         navigate_button.isHidden = true

@@ -30,12 +30,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SA5-ke-CNA">
-                                <rect key="frame" x="300" y="545" width="65" height="30"/>
+                                <rect key="frame" x="260" y="545" width="65" height="30"/>
                                 <color key="backgroundColor" red="0.35323660714285715" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Navigate!"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAm-Wx-wUh">
-                                <rect key="frame" x="300" y="575" width="42" height="21"/>
+                                <rect key="frame" x="260" y="575" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -75,7 +75,7 @@
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Eye-zm-BO6">
-                                <rect key="frame" x="290" y="619" width="85" height="29"/>
+                                <rect key="frame" x="255" y="619" width="85" height="29"/>
                                 <segments>
                                     <segment title="USC"/>
                                     <segment title="Me"/>
@@ -88,11 +88,11 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="TFl-PH-ojX" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="9aO-EU-N0o"/>
-                            <constraint firstItem="WAm-Wx-wUh" firstAttribute="leading" secondItem="TFl-PH-ojX" secondAttribute="trailing" constant="260" id="J5Z-r1-g6E"/>
+                            <constraint firstItem="WAm-Wx-wUh" firstAttribute="leading" secondItem="TFl-PH-ojX" secondAttribute="trailing" constant="220" id="J5Z-r1-g6E"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="TFl-PH-ojX" secondAttribute="bottom" id="MuM-iS-Jyz"/>
                             <constraint firstItem="rgJ-i3-nhK" firstAttribute="leading" secondItem="fQB-W9-ywj" secondAttribute="trailing" constant="10" id="Tkf-IP-Oxw"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Eye-zm-BO6" secondAttribute="bottom" constant="20" id="YPE-gX-E1V"/>
-                            <constraint firstItem="SA5-ke-CNA" firstAttribute="leading" secondItem="TFl-PH-ojX" secondAttribute="trailing" constant="260" id="cgt-JD-55b"/>
+                            <constraint firstItem="SA5-ke-CNA" firstAttribute="leading" secondItem="TFl-PH-ojX" secondAttribute="trailing" constant="220" id="cgt-JD-55b"/>
                             <constraint firstItem="TFl-PH-ojX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-100" id="faQ-FP-JX5"/>
                             <constraint firstItem="WAm-Wx-wUh" firstAttribute="top" secondItem="SA5-ke-CNA" secondAttribute="bottom" id="hD4-MQ-1nz"/>
                             <constraint firstItem="rgJ-i3-nhK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="nC9-z6-Tav"/>
@@ -100,7 +100,7 @@
                             <constraint firstItem="fQB-W9-ywj" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="qkH-Jn-7xt"/>
                             <constraint firstItem="Eye-zm-BO6" firstAttribute="top" secondItem="WAm-Wx-wUh" secondAttribute="bottom" constant="23" id="uV0-dj-TBb"/>
                             <constraint firstItem="fQB-W9-ywj" firstAttribute="leading" secondItem="TFl-PH-ojX" secondAttribute="trailing" constant="60" id="ubo-k2-cSS"/>
-                            <constraint firstItem="Eye-zm-BO6" firstAttribute="leading" secondItem="TFl-PH-ojX" secondAttribute="trailing" constant="250" id="w3A-u5-hmF"/>
+                            <constraint firstItem="Eye-zm-BO6" firstAttribute="leading" secondItem="TFl-PH-ojX" secondAttribute="trailing" constant="215" id="w3A-u5-hmF"/>
                             <constraint firstItem="SZP-1V-Mz9" firstAttribute="leading" secondItem="TFl-PH-ojX" secondAttribute="trailing" constant="1" id="y1V-qx-Qp2"/>
                         </constraints>
                     </view>

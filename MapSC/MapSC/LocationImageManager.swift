@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+/*
+ Class for managing images rendered on top of Google Maps SDK 
+ */
 class LocationImageManager
 {
     func setImage(parameter:UscLocation, image_name: String) -> UIImage

@@ -1,6 +1,10 @@
 import UIKit
 import CoreLocation
 
+/*
+ Class for storing USC locations
+ Keep on adding information when relevant, remember to update usc_locations.swift
+ */
 class UscLocation {
     var name : String
     var address : String

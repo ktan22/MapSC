@@ -1,6 +1,11 @@
 import Foundation
 
-
+/*
+ Local Usc building name data base constant. Grabbed through http://fmsmaps4.usc.edu/usc/php/bl_list_no.php 
+ website and used parse_results.py to create. Not 100% accurate, but good enough for now.
+ A Map data structure with abbreviation keys that have values as other maps.
+ Information include: id, name, address
+ */
 struct ConstantMap{
 	static let usc_map = [
 		"PSA":
