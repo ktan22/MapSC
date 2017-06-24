@@ -48,6 +48,12 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     @IBOutlet weak var menu_constraint: NSLayoutConstraint!
 
     
+    @IBAction func navigation_button(_ sender: Any) {
+        let dest = usc_location.coordinate;
+        self.get_navigation(source: curLocation, dest: usc_location.coordinate)
+    }
+    
+    
     //Action Linked to the press of the "menu" button: Pushes the menu view onto the screen with animation.
     //Because every other IBOutlet is built in relationship to this menu view, when it gets pushed out
     //All other objects also get pushed.
@@ -139,8 +145,8 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let l = (self.locationManager.location?.coordinate)!
-        curLocation = l
-        
+        //curLocation = l
+        curLocation = CLLocationCoordinate2D(latitude: 34.1220386047, longitude: -118.2878178101)
         mapView.isMyLocationEnabled = true
     }
     
@@ -202,9 +208,48 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         marker.map = nil
     }
     
+    func get_navigation(source : CLLocationCoordinate2D, dest :CLLocationCoordinate2D)
+    {
+        let source_long = "\(source.longitude)"
+        let source_lat = "\(source.latitude)"
+        let dest_long = "\(dest.longitude)"
+        let dest_lat = "\(dest.latitude)"
+        
+        let get_request = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source_lat),\(source_long)&destination=\(dest_lat),\(dest_long)&key=AIzaSyC-FtOPLb_MO38GqZcOLk7swhzabZbO8lQ"
     
+        Alamofire.request(get_request).responseJSON
+        { response in
+                // print response as string for debugging, testing, etc.
+                //let data = response.result.value as String
+            if let JSON = response.result.value
+            {
+                let mapResponse: [String: AnyObject] = JSON as! [String : AnyObject]
+                let routesArray = (mapResponse["routes"] as? Array) ?? []
+                let routes = (routesArray.first as? Dictionary<String, AnyObject>) ?? [:]
+                
+                let overviewPolyline = (routes["overview_polyline"] as? Dictionary<String,AnyObject>) ?? [:]
+                let polypoints = (overviewPolyline["points"] as? String) ?? ""
+                let line  = polypoints
+                
+                self.addPolyLine(encodedString: line)
+            }
+            
+        }
+    }
+    
+    func addPolyLine(encodedString: String) {
+        
+        let path = GMSMutablePath(fromEncodedPath: encodedString)
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeWidth = 5
+        polyline.strokeColor = .blue
+        polyline.map = mapView
         
     }
+    
+    
+    
+}
 
 
 

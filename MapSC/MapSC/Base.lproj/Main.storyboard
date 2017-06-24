@@ -33,6 +33,9 @@
                                 <rect key="frame" x="260" y="545" width="65" height="30"/>
                                 <color key="backgroundColor" red="0.35323660714285715" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Navigate!"/>
+                                <connections>
+                                    <action selector="navigation_button:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cgc-Jb-p4e"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAm-Wx-wUh">
                                 <rect key="frame" x="260" y="575" width="42" height="21"/>
