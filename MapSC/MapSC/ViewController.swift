@@ -30,6 +30,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     //Not an IBOutlet, but still an object to be rendered on screen. Only difference is that it attaches itself onto
     //Google maps instead of the screen. UI for a brief descriptor of location inputed
     var marker = GMSMarker(position:CLLocationCoordinate2D(latitude: 0, longitude: 0))
+    var polyline = GMSPolyline()
     
     //When a user fills out a destination, this variable gets populated with data. Used to make data collection easier
     var usc_location = UscLocation(name: "",address: "",abbreviation:"",id:"",coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
@@ -201,6 +202,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     }
     
     //Set the default values back. Put all default code every search here (NOT INITIALIZATION)
+    //TODO: Add more default values here: (i.e. path line etc. -basically, whatever needs to be cleared)
     func set_default_values()
     {
         navigate_button.isHidden = true
@@ -219,8 +221,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     
         Alamofire.request(get_request).responseJSON
         { response in
-                // print response as string for debugging, testing, etc.
-                //let data = response.result.value as String
+            
             if let JSON = response.result.value
             {
                 let mapResponse: [String: AnyObject] = JSON as! [String : AnyObject]
@@ -232,18 +233,25 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
                 let line  = polypoints
                 
                 self.addPolyLine(encodedString: line)
+                
             }
             
         }
+        
     }
     
     func addPolyLine(encodedString: String) {
         
         let path = GMSMutablePath(fromEncodedPath: encodedString)
-        let polyline = GMSPolyline(path: path)
+        
+        polyline = GMSPolyline(path: path)
         polyline.strokeWidth = 5
         polyline.strokeColor = .blue
         polyline.map = mapView
+        
+        //shift camera
+        let bounds = GMSCoordinateBounds(path: path!)
+        self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 15.0))
         
     }
     
