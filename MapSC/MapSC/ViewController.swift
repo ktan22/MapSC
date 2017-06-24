@@ -146,8 +146,8 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         let l = (self.locationManager.location?.coordinate)!
-        //curLocation = l
-        curLocation = CLLocationCoordinate2D(latitude: 34.1220386047, longitude: -118.2878178101)
+        curLocation = l
+        //curLocation = CLLocationCoordinate2D(latitude: 34.1220386047, longitude: -118.2878178101) For testing closer locations only
         mapView.isMyLocationEnabled = true
     }
     
