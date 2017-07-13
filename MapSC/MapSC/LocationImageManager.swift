@@ -28,6 +28,20 @@ class LocationImageManager
         return new_image
     }
     
+    func imageOnImage(bottom_image: UIImage , top_image: UIImage) -> UIImage
+    {
+        let newSize = CGSize(width: 200, height: 200) // set this to what you need
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        
+        bottom_image.draw(in: CGRect(origin: CGPoint(), size: newSize))
+        top_image.draw(in: CGRect(origin: CGPoint(x:10,y:10), size: newSize))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
     func textOnImage(drawText text: NSString, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
         let textColor = UIColor.red
         let textFont = UIFont(name: "Helvetica Bold", size: 10)!
