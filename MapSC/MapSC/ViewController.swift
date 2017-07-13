@@ -239,6 +239,40 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
                     let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 18.0)
                     self.mapView.animate(to: camera)
                     
+                    let source_lat = self.curLocation.latitude
+                    let source_long = self.curLocation.longitude
+                    let dest_lat = self.usc_location.coordinate.latitude
+                    let dest_long = self.usc_location.coordinate.longitude
+                    
+                    let get_request_2 = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(source_lat),\(source_long)&destinations=\(dest_lat),\(dest_long)&key=AIzaSyDZ4PsIpEVmrBXBMsXmotfl_h1bvG_gLvk"
+                    
+                    Alamofire.request(get_request_2).responseJSON
+                        { response in
+                            
+                            if let JSON = response.result.value
+                            {
+                                let mapResponse: [String: AnyObject] = JSON as! [String : AnyObject]
+                                let rows_array = (mapResponse["rows"] as? Array) ?? []
+                                let rows_map = (rows_array.first as? Dictionary<String, AnyObject>) ?? [:]
+                                let element_array = (rows_map["elements"] as? Array) ?? []
+                                let element_map = (element_array.first as? Dictionary<String, AnyObject>) ?? [:]
+                                
+                                
+                                
+                                // let duration_map = (duration_array.first as? Dictionary<String, AnyObject>) ?? [:]
+                                //let distance_array = (element_map["distance"] as? Array) ?? []
+                                //let distance_map = (distance_array.first as? Dictionary<String, AnyObject>) ?? [:]
+                                let duration_map = element_map["duration"] as! Dictionary<String, AnyObject>
+                                let distance_map = element_map["distance"] as! Dictionary<String, AnyObject>
+                                let distance = distance_map["text"] as! String
+                                let duration = duration_map["text"] as! String
+                                
+                                self.distance_duration_label.text = distance + "\n(" + duration + ")"
+                                
+                            }
+                            
+                    }
+                    
                     
                     
                 }
@@ -295,34 +329,6 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
             
         }
         
-        let get_request_2 = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(source_lat),\(source_long)&destinations=\(dest_lat),\(dest_long)&key=AIzaSyDZ4PsIpEVmrBXBMsXmotfl_h1bvG_gLvk"
-        
-        Alamofire.request(get_request_2).responseJSON
-            { response in
-                
-                if let JSON = response.result.value
-                {
-                    let mapResponse: [String: AnyObject] = JSON as! [String : AnyObject]
-                    let rows_array = (mapResponse["rows"] as? Array) ?? []
-                    let rows_map = (rows_array.first as? Dictionary<String, AnyObject>) ?? [:]
-                    let element_array = (rows_map["elements"] as? Array) ?? []
-                    let element_map = (element_array.first as? Dictionary<String, AnyObject>) ?? [:]
-                    
-                    
-                    
-                   // let duration_map = (duration_array.first as? Dictionary<String, AnyObject>) ?? [:]
-                    //let distance_array = (element_map["distance"] as? Array) ?? []
-                    //let distance_map = (distance_array.first as? Dictionary<String, AnyObject>) ?? [:]
-                    let duration_map = element_map["duration"] as! Dictionary<String, AnyObject>
-                    let distance_map = element_map["distance"] as! Dictionary<String, AnyObject>
-                    let distance = distance_map["text"] as! String
-                    let duration = duration_map["text"] as! String
-                    
-                    self.distance_duration_label.text = distance + "\n(" + duration + ")"
-
-                }
-                
-        }
         
     }
     
