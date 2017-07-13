@@ -12,7 +12,7 @@ import CoreLocation
 import Alamofire
 import GooglePlacePicker
 
-class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDelegate {
+class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDelegate, UITextFieldDelegate {
 
     //The overall map view displaying google maps that is spliced across the screen
     lazy var mapView = GMSMapView()
@@ -89,24 +89,34 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     //Action linked to the press of the "search" button: Take the contents of the text field
     //and try to get a USC location out of it using the usc_location.swift local database
     //If match not found, do nothing
-    @IBAction func search(_ sender: Any) {
+    @IBAction func search(_ sender: Any?) {
         let word = location_textfield.text
-        
         if(grab_usc_locations(word: word!) == true)
         {
             navigate_button.isHidden = false
             
             destination_label.text = "to " + usc_location.abbreviation
             destination_label.isHidden = false
+            location_textfield.text = ""
         }
         else{
             set_default_values()
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        self.search(nil)
+        return true
+    }
+    
+    
     //Function that happens when the view comes into play: Include all setup code here
     override func viewDidLoad() {
         super.viewDidLoad()
+        location_textfield.returnKeyType =  UIReturnKeyType.search
+        location_textfield.delegate = self;
         
         //Location manager initialization to get current location. Make sure to
         // set info.plist "Privacy - Location When In Use Usage Description" to enable the setting as well
