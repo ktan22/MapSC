@@ -105,6 +105,11 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     @IBAction func search(_ sender: Any?) {
         let word = location_textfield.text
         
+        if(word == "")
+        {
+            return
+        }
+        
         set_default_values()
         if(grab_usc_locations(word: word!) == true)
         {
