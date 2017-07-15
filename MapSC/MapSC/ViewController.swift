@@ -19,6 +19,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     
     //Current location of user stored in a variable
     var curLocation = CLLocationCoordinate2D()
+    var curHeading = 0.0
     
     //Location manager that keeps track of user location: from CoreLocation API
     var locationManager = CLLocationManager()
@@ -38,12 +39,13 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     //The other IBOutlets that fill up the page
     @IBOutlet weak var usc_location_image: UIImageView!
     @IBOutlet weak var navigate_button: UIButton!
-    @IBOutlet weak var search_button: UIButton!
+    //@IBOutlet weak var search_button: UIButton!
     @IBOutlet weak var location_textfield: UITextField!
     @IBOutlet weak var view_segmented_control: UISegmentedControl!
     @IBOutlet weak var destination_label: UILabel!
     
     @IBOutlet weak var distance_duration_label: UILabel!
+    
     //Variables that control functionality of menu
     var menu_showing = false
     @IBOutlet weak var menu: UIView!
@@ -52,16 +54,31 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     @IBOutlet weak var menu_button_view: UIView!
     @IBOutlet weak var menu_constraint: NSLayoutConstraint!
     
+    @IBOutlet weak var cancel_navigation_button: UIButton!
+    @IBOutlet weak var current_location_button: UIButton!
     @IBOutlet weak var navigation_constraint: NSLayoutConstraint!
     //Navigation Variables
     
     @IBAction func navigation_button(_ sender: Any) {
-        self.get_navigation(source: curLocation, dest: usc_location.coordinate)
+        self.get_navigation()
         //navigate_button.setTitle("Start", for: .normal)
         //destination_label.isHidden = true
 
     }
     
+    @IBAction func cancel_navigation_button_pressed(_ sender: Any) {
+        set_default_values()
+        if(grab_usc_locations(word: usc_location.abbreviation) == true)
+        {
+            destination_label.text = "("+usc_location.abbreviation + ") " + usc_location.name
+            location_textfield.text = ""
+            navigation_constraint.constant = 0
+            UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded()})
+        }
+    }
+    @IBAction func current_location_button_pressed(_ sender: Any) {
+        get_navigation()
+    }
     
     //Action Linked to the press of the "menu" button: Pushes the menu view onto the screen with animation.
     //Because every other IBOutlet is built in relationship to this menu view, when it gets pushed out
@@ -94,15 +111,32 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         }
     }
     
+    @IBAction func open_google_map_button_pressed(_ sender: Any) {
+        
+        let address_request = (usc_location.address).replacingOccurrences(of: " ", with: "+")
+        let url = URL(string: "https://www.google.com/maps/search/?api=1&query=\(address_request)")!
+        
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
+    }
+    
+    
     @IBAction func ClearButtonPress(_ sender: Any) {
         set_default_values()
     }
     
+    @IBAction func cancel_button_pressed_down_menu(_ sender: Any) {
+        set_default_values()
+    }
     
     //Action linked to the press of the "search" button: Take the contents of the text field
     //and try to get a USC location out of it using the usc_location.swift local database
-    //If match not found, do nothing
-    @IBAction func search(_ sender: Any?) {
+    //If match not found, do nothing    
+    func search()
+    {
         let word = location_textfield.text
         
         if(word == "")
@@ -125,7 +159,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         textField.resignFirstResponder()
-        self.search(nil)
+        self.search()
         return true
     }
     
@@ -144,6 +178,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
         locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
         
         //Setting initial camera to USC campus (34.0220386047, -118.2858178101) is hard coded value
         let camera = GMSCameraPosition.camera(withLatitude: 34.0220386047, longitude: -118.2858178101, zoom: 15.0)
@@ -152,15 +187,19 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         //Adding Google maps subview so that we can layer IBOutlets on top
         self.view.addSubview(mapView)
         
+        //locationImageManager.make_button_circle(button: current_location_button)
         //IBOutlet layering hierarchy (Order does matter!)
         self.view.insertSubview(menu_button_view, aboveSubview: self.mapView)
         self.view.insertSubview(menu, aboveSubview: self.mapView)
         self.view.insertSubview(location_textfield, aboveSubview: self.mapView)
-        self.view.insertSubview(search_button, aboveSubview: self.mapView)
+        location_textfield.autocorrectionType = .no
+        //self.view.insertSubview(search_button, aboveSubview: self.mapView)
         //self.view.insertSubview(view_segmented_control, aboveSubview: self.mapView)
         //self.view.insertSubview(navigate_button, aboveSubview: self.mapView)
         //self.view.insertSubview(distance_duration_label, aboveSubview: self.mapView)
         self.view.insertSubview(navigation_menu, aboveSubview: self.mapView)
+        self.view.insertSubview(current_location_button, aboveSubview: self.mapView)
+        self.view.insertSubview(cancel_navigation_button, aboveSubview: self.mapView)
         
         //Make sure "navigate" button and "destination" label are hidden at first 
         //because user has not inputted anything yet
@@ -168,7 +207,9 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         //navigate_button.isHidden = true
         //destination_label.isHidden = true
         menu_constraint.constant = -140
-        navigation_constraint.constant = -190
+        navigation_constraint.constant = -230
+        cancel_navigation_button.isHidden = true
+        current_location_button.isHidden = true
     }
     
     //The location manager delegate called whenever user location is updated
@@ -177,8 +218,11 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         
         let l = (self.locationManager.location?.coordinate)!
         curLocation = l
-        curLocation = CLLocationCoordinate2D(latitude: 34.0220386047, longitude: -118.2878178101) //For testing closer locations only
+        //curLocation = CLLocationCoordinate2D(latitude: 34.0220386047, longitude: -118.2878178101) //For testing closer locations only
         mapView.isMyLocationEnabled = true
+    }
+    func locationManager(_ manager:CLLocationManager, didUpdateHeading heading: CLHeading){
+        curHeading = Double(heading.magneticHeading)
     }
     
     //Search local usc building database for input string
@@ -236,8 +280,8 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
                     //self.marker.icon = icon_image
                     self.marker.map = self.mapView
                     
-                    let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 18.0)
-                    self.mapView.animate(to: camera)
+                    //let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 18.0)
+                    //self.mapView.animate(to: camera)
                     
                     let source_lat = self.curLocation.latitude
                     let source_long = self.curLocation.longitude
@@ -273,6 +317,29 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
                             
                     }
                     
+                    let get_request3 = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source_lat),\(source_long)&destination=\(dest_lat),\(dest_long)&mode=walking&key=AIzaSyC-FtOPLb_MO38GqZcOLk7swhzabZbO8lQ"
+                    
+                    Alamofire.request(get_request3).responseJSON
+                        { response in
+                            
+                            if let JSON = response.result.value
+                            {
+                                let mapResponse: [String: AnyObject] = JSON as! [String : AnyObject]
+                                let routesArray = (mapResponse["routes"] as? Array) ?? []
+                                let routes = (routesArray.first as? Dictionary<String, AnyObject>) ?? [:]
+                                
+                                //print(duration["text"])
+                                
+                                let overviewPolyline = (routes["overview_polyline"] as? Dictionary<String,AnyObject>) ?? [:]
+                                let polypoints = (overviewPolyline["points"] as? String) ?? ""
+                                let line  = polypoints
+                                
+                                self.addPolyLine(encodedString: line)
+                                
+                            }
+                            
+                    }
+                    
                     
                     
                 }
@@ -291,45 +358,31 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         //destination_label.isHidden = true
         marker.map = nil
         
-        menu_constraint.constant = -140
-        navigation_constraint.constant = -190
-        UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded()})
+        close_menus()
         
         polyline.map = nil
         distance_duration_label.text = ""
+        self.menu_showing = false
+        cancel_navigation_button.isHidden = true
+        current_location_button.isHidden = true
     }
     
-    func get_navigation(source : CLLocationCoordinate2D, dest :CLLocationCoordinate2D)
+    func get_navigation()
     {
-        let source_long = "\(source.longitude)"
-        let source_lat = "\(source.latitude)"
-        let dest_long = "\(dest.longitude)"
-        let dest_lat = "\(dest.latitude)"
-        
-        let get_request = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source_lat),\(source_long)&destination=\(dest_lat),\(dest_long)&mode=walking&key=AIzaSyC-FtOPLb_MO38GqZcOLk7swhzabZbO8lQ"
+        let camera = GMSCameraPosition.camera(withLatitude: self.curLocation.latitude, longitude: self.curLocation.longitude, zoom: 18.0,bearing:curHeading, viewingAngle: 55)
+        self.mapView.animate(to: camera)
+        close_menus()
+        cancel_navigation_button.isHidden = false
+        current_location_button.isHidden = false
+    }
     
-        Alamofire.request(get_request).responseJSON
-        { response in
-            
-            if let JSON = response.result.value
-            {
-                let mapResponse: [String: AnyObject] = JSON as! [String : AnyObject]
-                let routesArray = (mapResponse["routes"] as? Array) ?? []
-                let routes = (routesArray.first as? Dictionary<String, AnyObject>) ?? [:]
-                
-                //print(duration["text"])
-                
-                let overviewPolyline = (routes["overview_polyline"] as? Dictionary<String,AnyObject>) ?? [:]
-                let polypoints = (overviewPolyline["points"] as? String) ?? ""
-                let line  = polypoints
-                
-                self.addPolyLine(encodedString: line)
-                
-            }
-            
-        }
-        
-        
+    
+    
+    func close_menus()
+    {
+        menu_constraint.constant = -140
+        navigation_constraint.constant = -230
+        UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded()})
     }
     
     func addPolyLine(encodedString: String) {
@@ -348,9 +401,6 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         
     }
     
-    func beginNavigation(start: CLLocationCoordinate2D, dest: CLLocationCoordinate2D){
-        
-    }
     
     
     

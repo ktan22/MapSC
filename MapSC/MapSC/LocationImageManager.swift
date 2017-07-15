@@ -63,4 +63,21 @@ class LocationImageManager
         
         return newImage!
     }
+    
+    func make_button_circle(button: UIButton)
+    {
+        button.frame = CGRect(x: 160, y: 100, width: 50, height: 50)
+        button.layer.cornerRadius = 0.5 * button.bounds.size.width
+        button.clipsToBounds = true
+        //button.setImage(UIImage(named:"button_my_location.png"), for: .normal)
+        //button.addTarget(self, action: #selector(thumbsUpButtonPressed), for: .touchUpInside)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 }
