@@ -18,15 +18,15 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     lazy var mapView = GMSMapView()
     
     //Current location of user stored in a variable
-    var curLocation = CLLocationCoordinate2D()
-    var curHeading = 0.0
+    var cur_user_location = CLLocationCoordinate2D()
+    var cur_phone_angle = 0.0
     
     //Location manager that keeps track of user location: from CoreLocation API
-    var locationManager = CLLocationManager()
+    var location_manager = CLLocationManager()
     
     //Custom image manager. When dealing with image processing, always make functions in this class and call 
     //from this variable
-    let locationImageManager = LocationImageManager()
+    let location_image_manager = LocationImageManager()
     
     //Not an IBOutlet, but still an object to be rendered on screen. Only difference is that it attaches itself onto
     //Google maps instead of the screen. UI for a brief descriptor of location inputed
@@ -34,9 +34,12 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     var polyline = GMSPolyline()
     
     //When a user fills out a destination, this variable gets populated with data. Used to make data collection easier
-    var usc_location = UscLocation(name: "",address: "",abbreviation:"",id:"",coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0))
+    var usc_location = UscLocation()
     
     //The other IBOutlets that fill up the page
+    
+    @IBOutlet weak var content_label: UILabel!
+    
     @IBOutlet weak var usc_location_image: UIImageView!
     @IBOutlet weak var navigate_button: UIButton!
     //@IBOutlet weak var search_button: UIButton!
@@ -59,25 +62,78 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     @IBOutlet weak var navigation_constraint: NSLayoutConstraint!
     //Navigation Variables
     
-    @IBAction func navigation_button(_ sender: Any) {
-        self.get_navigation()
-        //navigate_button.setTitle("Start", for: .normal)
-        //destination_label.isHidden = true
-
+    //BUTTONS
+    @IBAction func dining_filter_button_pressed(_ sender: Any) {
+        move_camera_to(to: "USC")
+        set_default_values()
+        
+        for location in ConstantMap.usc_dining
+        {
+            let name = location["name"]
+            let content = location["content"]
+            let lat = CLLocationDegrees(location["lat"]!)
+            let long = CLLocationDegrees(location["lng"]!)
+            let marker_dining = GMSMarker(position: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
+            marker_dining.title = name
+            marker_dining.map = self.mapView
+            marker_dining.snippet = content
+        }
+        
     }
     
-    @IBAction func cancel_navigation_button_pressed(_ sender: Any) {
-        set_default_values()
-        if(grab_usc_locations(word: usc_location.abbreviation) == true)
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        
+        let name = marker.title
+        
+        for location in ConstantMap.usc_dining
         {
-            destination_label.text = "("+usc_location.abbreviation + ") " + usc_location.name
-            location_textfield.text = ""
-            navigation_constraint.constant = 0
-            UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded()})
+            if(String(name!) == String(location["name"]!))
+            {
+                var code = String(describing: location["code"]!)
+                let lat = CLLocationDegrees(location["lat"]!)
+                let long = CLLocationDegrees(location["lng"]!)
+                let image_name = String(describing: location["image"]!)
+                let loc_name = String(describing: location["name"]!)
+                let coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+                
+                if(code == "")
+                {
+                    code = String(describing: String(name!).characters.first!)
+                }
+                //self.marker = marker
+                //marker.tracksInfoWindowChanges = true
+                self.usc_location.set_up_values(name: loc_name, address: "", abbreviation: code, id: "", coordinate: coordinate, content: marker.snippet!, image_named: image_name)
+                self.display_dest_usc_location_info_using_lat_long()
+            }
         }
+
+        return true
     }
-    @IBAction func current_location_button_pressed(_ sender: Any) {
-        get_navigation()
+    
+    @objc(mapView:didTapAtCoordinate:) func mapView(_ mapView: GMSMapView, didTapAt didTapAtCoordinate: CLLocationCoordinate2D) {
+        print("lat :\(didTapAtCoordinate.latitude)")
+        print("long :\(didTapAtCoordinate.longitude)")
+    }
+    
+
+    @IBAction func simple_guidance_button_down_menu_pressed(_ sender: Any) {
+        self.orient_simple_navigation()
+    }
+    
+    @IBAction func cancel_button_during_navigation_pressed(_ sender: Any) {
+        set_default_values()
+        
+        move_camera_to(to: "ME")
+        
+        display_dest_usc_location_info_using_lat_long()
+        //destination_label.text = "("+usc_location.abbreviation + ") " + usc_location.name
+        location_textfield.text = ""
+        navigation_constraint.constant = 0
+        UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded()})
+    }
+
+    @IBAction func orient_button_during_navigation_pressed(_ sender: Any) {
+        self.orient_simple_navigation()
     }
     
     //Action Linked to the press of the "menu" button: Pushes the menu view onto the screen with animation.
@@ -97,15 +153,12 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     
     //Linked to the "USC/ME" segmented view: Just changes the camera view based on which option selected
     //USC: The USC campus, ME: Current location
-    @IBAction func switchViews(_ sender: Any) {
+    @IBAction func switch_views_segmented_control_touched(_ sender: Any) {
         switch view_segmented_control.selectedSegmentIndex {
         case 0:
-            //USC latitude: 34.0220386047, USC longitude:-118.2858178101
-            let camera = GMSCameraPosition.camera(withLatitude: 34.0220386047, longitude: -118.2858178101, zoom: 15.0)
-            mapView.animate(to: camera)
+            move_camera_to(to: "USC")
         case 1:
-            let camera = GMSCameraPosition.camera(withLatitude: curLocation.latitude, longitude: curLocation.longitude, zoom: 18.0)
-            mapView.animate(to: camera)
+            move_camera_to(to: "ME")
         default:
             break;
         }
@@ -113,19 +166,20 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     
     @IBAction func open_google_map_button_pressed(_ sender: Any) {
         
-        let address_request = (usc_location.address).replacingOccurrences(of: " ", with: "+")
-        let url = URL(string: "https://www.google.com/maps/search/?api=1&query=\(address_request)")!
+        //let address_request = (usc_location.address).replacingOccurrences(of: " ", with: "+")
+        //let url = URL(string: "https://www.google.com/maps/search/?api=1&query=\(address_request)")!
+        let url = URL(string: "https://www.google.com/maps/search/?api=1&query=\(usc_location.coordinate.latitude),\(usc_location.coordinate.longitude)")
         
         if #available(iOS 10.0, *) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         } else {
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.openURL(url!)
         }
     }
     
-    
-    @IBAction func ClearButtonPress(_ sender: Any) {
+    @IBAction func clear_button_pressed_side_menu(_ sender: Any) {
         set_default_values()
+
     }
     
     @IBAction func cancel_button_pressed_down_menu(_ sender: Any) {
@@ -135,31 +189,26 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     //Action linked to the press of the "search" button: Take the contents of the text field
     //and try to get a USC location out of it using the usc_location.swift local database
     //If match not found, do nothing    
-    func search()
+    func search_from_text_field()
     {
         let word = location_textfield.text
-        
         if(word == "")
         {
             return
         }
         
         set_default_values()
-        if(grab_usc_locations(word: word!) == true)
+        if(!get_lat_long_from_dest_address_in_usc_map(word: word!))
         {
-            //navigate_button.isHidden = false
-            destination_label.text = "("+usc_location.abbreviation + ") " + usc_location.name
-            //destination_label.isHidden = false
-            location_textfield.text = ""
-            navigation_constraint.constant = 0
-            UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded()})
+            print("Location not found at USC. Try Again.")
         }
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         textField.resignFirstResponder()
-        self.search()
+        self.search_from_text_field()
         return true
     }
     
@@ -172,13 +221,14 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         
         //Location manager initialization to get current location. Make sure to
         // set info.plist "Privacy - Location When In Use Usage Description" to enable the setting as well
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter=kCLDistanceFilterNone;
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startMonitoringSignificantLocationChanges()
-        locationManager.startUpdatingLocation()
-        locationManager.startUpdatingHeading()
+        location_manager.delegate = self
+        location_manager.desiredAccuracy = kCLLocationAccuracyBest
+        location_manager.distanceFilter=kCLDistanceFilterNone;
+        location_manager.requestWhenInUseAuthorization()
+        location_manager.startMonitoringSignificantLocationChanges()
+        location_manager.startUpdatingLocation()
+        location_manager.startUpdatingHeading()
+        
         
         //Setting initial camera to USC campus (34.0220386047, -118.2858178101) is hard coded value
         let camera = GMSCameraPosition.camera(withLatitude: 34.0220386047, longitude: -118.2858178101, zoom: 15.0)
@@ -193,10 +243,6 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         self.view.insertSubview(menu, aboveSubview: self.mapView)
         self.view.insertSubview(location_textfield, aboveSubview: self.mapView)
         location_textfield.autocorrectionType = .no
-        //self.view.insertSubview(search_button, aboveSubview: self.mapView)
-        //self.view.insertSubview(view_segmented_control, aboveSubview: self.mapView)
-        //self.view.insertSubview(navigate_button, aboveSubview: self.mapView)
-        //self.view.insertSubview(distance_duration_label, aboveSubview: self.mapView)
         self.view.insertSubview(navigation_menu, aboveSubview: self.mapView)
         self.view.insertSubview(current_location_button, aboveSubview: self.mapView)
         self.view.insertSubview(cancel_navigation_button, aboveSubview: self.mapView)
@@ -204,52 +250,45 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         //Make sure "navigate" button and "destination" label are hidden at first 
         //because user has not inputted anything yet
         //Also make sure menu is out of the picture because user has not hit menu button yet
-        //navigate_button.isHidden = true
-        //destination_label.isHidden = true
         menu_constraint.constant = -140
         navigation_constraint.constant = -230
         cancel_navigation_button.isHidden = true
         current_location_button.isHidden = true
+        mapView.delegate = self
     }
     
     //The location manager delegate called whenever user location is updated
     //just update the current position for curLocation as well as render it on screen
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let l = (self.locationManager.location?.coordinate)!
-        curLocation = l
-        //curLocation = CLLocationCoordinate2D(latitude: 34.0220386047, longitude: -118.2878178101) //For testing closer locations only
+        let l = (self.location_manager.location?.coordinate)!
+        cur_user_location = l
+        cur_user_location = CLLocationCoordinate2D(latitude: 34.0220386047, longitude: -118.2878178101) //For testing closer locations only
         mapView.isMyLocationEnabled = true
     }
+    
+    //To track direction phone is facing
     func locationManager(_ manager:CLLocationManager, didUpdateHeading heading: CLHeading){
-        curHeading = Double(heading.magneticHeading)
+        cur_phone_angle = Double(heading.magneticHeading)
     }
     
     //Search local usc building database for input string
     //If match, then update usc_location variable with information
     //If no match, then return false
-    func grab_usc_locations(word: String) -> Bool
+    func get_lat_long_from_dest_address_in_usc_map(word: String) -> Bool
     {
         if(ConstantMap.usc_map[word.uppercased()] == nil)
         {
-            print("Location not found at USC. Try Again.")
             return false
         }
         
         let dict = ConstantMap.usc_map[word.uppercased()]!
-        
         let lookup_address = dict["address"]!
         let lookup_name = dict["name"]!
         let lookup_id = dict["id"]!
         let lookup_abbreviation = word.uppercased()
         
-        usc_location.name = lookup_name
-        usc_location.address = lookup_address
-        usc_location.id = lookup_id
-        usc_location.abbreviation = lookup_abbreviation
-        
-        let address_request = (usc_location.address).replacingOccurrences(of: " ", with: "+")
-        
+        let address_request = (lookup_address).replacingOccurrences(of: " ", with: "+")
         let get_request = "https://maps.googleapis.com/maps/api/geocode/json?address=\(address_request)&key=AIzaSyBIIkq2aJwHsjwujPSptKQXJeyCeQQvTjE"
         
         Alamofire.request(get_request).responseJSON
@@ -268,83 +307,16 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
 
                     //place picker
                     let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                    self.usc_location.coordinate = coordinate
-                    //let icon_image = self.locationImageManager.setImage(parameter: self.usc_location, image_name: "speechbubble")
-                    let pic_image = UIImage(named: self.usc_location.abbreviation)
-                    
-                    self.usc_location_image.image = pic_image
-                    
-                    self.marker.map = nil
-                    self.marker = GMSMarker(position:coordinate)
-                    self.marker.title = self.usc_location.address
-                    //self.marker.icon = icon_image
-                    self.marker.map = self.mapView
-                    
                     //let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 18.0)
                     //self.mapView.animate(to: camera)
                     
-                    let source_lat = self.curLocation.latitude
-                    let source_long = self.curLocation.longitude
-                    let dest_lat = self.usc_location.coordinate.latitude
-                    let dest_long = self.usc_location.coordinate.longitude
+                    self.usc_location.set_up_values(name: lookup_name, address: lookup_address, abbreviation: lookup_abbreviation, id: lookup_id, coordinate: coordinate, content: "", image_named: lookup_abbreviation)
+                    self.display_dest_usc_location_info_using_lat_long()
+                    self.move_camera_to(to: "DEST") // maybe change later
                     
-                    let get_request_2 = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(source_lat),\(source_long)&destinations=\(dest_lat),\(dest_long)&key=AIzaSyDZ4PsIpEVmrBXBMsXmotfl_h1bvG_gLvk"
-                    
-                    Alamofire.request(get_request_2).responseJSON
-                        { response in
-                            
-                            if let JSON = response.result.value
-                            {
-                                let mapResponse: [String: AnyObject] = JSON as! [String : AnyObject]
-                                let rows_array = (mapResponse["rows"] as? Array) ?? []
-                                let rows_map = (rows_array.first as? Dictionary<String, AnyObject>) ?? [:]
-                                let element_array = (rows_map["elements"] as? Array) ?? []
-                                let element_map = (element_array.first as? Dictionary<String, AnyObject>) ?? [:]
-                                
-                                
-                                
-                                // let duration_map = (duration_array.first as? Dictionary<String, AnyObject>) ?? [:]
-                                //let distance_array = (element_map["distance"] as? Array) ?? []
-                                //let distance_map = (distance_array.first as? Dictionary<String, AnyObject>) ?? [:]
-                                let duration_map = element_map["duration"] as! Dictionary<String, AnyObject>
-                                let distance_map = element_map["distance"] as! Dictionary<String, AnyObject>
-                                let distance = distance_map["text"] as! String
-                                let duration = duration_map["text"] as! String
-                                
-                                self.distance_duration_label.text = distance + "\n(" + duration + ")"
-                                
-                            }
-                            
                     }
-                    
-                    let get_request3 = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source_lat),\(source_long)&destination=\(dest_lat),\(dest_long)&mode=walking&key=AIzaSyC-FtOPLb_MO38GqZcOLk7swhzabZbO8lQ"
-                    
-                    Alamofire.request(get_request3).responseJSON
-                        { response in
-                            
-                            if let JSON = response.result.value
-                            {
-                                let mapResponse: [String: AnyObject] = JSON as! [String : AnyObject]
-                                let routesArray = (mapResponse["routes"] as? Array) ?? []
-                                let routes = (routesArray.first as? Dictionary<String, AnyObject>) ?? [:]
-                                
-                                //print(duration["text"])
-                                
-                                let overviewPolyline = (routes["overview_polyline"] as? Dictionary<String,AnyObject>) ?? [:]
-                                let polypoints = (overviewPolyline["points"] as? String) ?? ""
-                                let line  = polypoints
-                                
-                                self.addPolyLine(encodedString: line)
-                                
-                            }
-                            
-                    }
-                    
-                    
-                    
                 }
-                
-        }
+        
         
         return true
             
@@ -356,37 +328,132 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     {
         //navigate_button.isHidden = true
         //destination_label.isHidden = true
+        //self.usc_location.clear_values()
         marker.map = nil
-        
-        close_menus()
-        
+        close_side_and_bottom_menus()
+        location_textfield.text = ""
         polyline.map = nil
         distance_duration_label.text = ""
         self.menu_showing = false
         cancel_navigation_button.isHidden = true
         current_location_button.isHidden = true
+        self.mapView.clear()
+        self.content_label.text = ""
     }
     
-    func get_navigation()
+    func orient_simple_navigation()
     {
-        let camera = GMSCameraPosition.camera(withLatitude: self.curLocation.latitude, longitude: self.curLocation.longitude, zoom: 18.0,bearing:curHeading, viewingAngle: 55)
-        self.mapView.animate(to: camera)
-        close_menus()
+        close_side_and_bottom_menus()
+        move_camera_to(to: "NAVIGATION")
         cancel_navigation_button.isHidden = false
         current_location_button.isHidden = false
     }
     
-    
-    
-    func close_menus()
+    func move_camera_to(to: String)
     {
-        menu_constraint.constant = -140
-        navigation_constraint.constant = -230
-        UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded()})
+        if(to == "USC")
+        {
+            //USC latitude: 34.0220386047, USC longitude:-118.2858178101
+            let camera = GMSCameraPosition.camera(withLatitude: 34.0220386047, longitude: -118.2858178101, zoom: 15.0)
+            mapView.animate(to: camera)
+        }
+        else if(to == "ME")
+        {
+            let camera = GMSCameraPosition.camera(withLatitude: cur_user_location.latitude, longitude: cur_user_location.longitude, zoom: 18.0)
+            mapView.animate(to: camera)
+        }
+        else if(to == "NAVIGATION")
+        {
+            let camera = GMSCameraPosition.camera(withLatitude: self.cur_user_location.latitude, longitude: self.cur_user_location.longitude, zoom: 18.0,bearing:cur_phone_angle, viewingAngle: 45)
+            self.mapView.animate(to: camera)
+        }
+        else if(to == "DEST")
+        {
+            let camera = GMSCameraPosition.camera(withLatitude: self.usc_location.coordinate.latitude, longitude: self.usc_location.coordinate.longitude, zoom: 18.0)
+            self.mapView.animate(to: camera)
+        }
     }
     
-    func addPolyLine(encodedString: String) {
+    //make sure usc_location is set before calling this function!
+    func display_dest_usc_location_info_using_lat_long()
+    {
+        let source_lat = self.cur_user_location.latitude
+        let source_long = self.cur_user_location.longitude
+        let dest_lat = self.usc_location.coordinate.latitude
+        let dest_long = self.usc_location.coordinate.longitude
         
+        //placing marker down
+        self.marker = GMSMarker(position:usc_location.coordinate)
+        self.marker.title = self.usc_location.address
+        self.marker.map = self.mapView
+        
+        //display content and location image, if possible
+        self.content_label.text = self.usc_location.content
+        let pic_image = UIImage(named: self.usc_location.image_named)
+        self.usc_location_image.image = pic_image
+
+        
+        //get duration and distance to destination
+        let get_request_2 = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(source_lat),\(source_long)&destinations=\(dest_lat),\(dest_long)&key=AIzaSyDZ4PsIpEVmrBXBMsXmotfl_h1bvG_gLvk"
+        
+        Alamofire.request(get_request_2).responseJSON
+            { response in
+                
+                if let JSON = response.result.value
+                {
+                    let mapResponse: [String: AnyObject] = JSON as! [String : AnyObject]
+                    let rows_array = (mapResponse["rows"] as? Array) ?? []
+                    let rows_map = (rows_array.first as? Dictionary<String, AnyObject>) ?? [:]
+                    let element_array = (rows_map["elements"] as? Array) ?? []
+                    let element_map = (element_array.first as? Dictionary<String, AnyObject>) ?? [:]
+                    
+                    // let duration_map = (duration_array.first as? Dictionary<String, AnyObject>) ?? [:]
+                    //let distance_array = (element_map["distance"] as? Array) ?? []
+                    //let distance_map = (distance_array.first as? Dictionary<String, AnyObject>) ?? [:]
+                    let duration_map = element_map["duration"] as! Dictionary<String, AnyObject>
+                    let distance_map = element_map["distance"] as! Dictionary<String, AnyObject>
+                    let distance = distance_map["text"] as! String
+                    let duration = duration_map["text"] as! String
+                    
+                    self.distance_duration_label.text = distance + "\n(" + duration + ")"
+                    
+                }
+                
+            }
+        
+        //get and display path to destination
+        let get_request3 = "https://maps.googleapis.com/maps/api/directions/json?origin=\(source_lat),\(source_long)&destination=\(dest_lat),\(dest_long)&mode=walking&key=AIzaSyC-FtOPLb_MO38GqZcOLk7swhzabZbO8lQ"
+        
+        Alamofire.request(get_request3).responseJSON
+            { response in
+                
+                if let JSON = response.result.value
+                {
+                    let mapResponse: [String: AnyObject] = JSON as! [String : AnyObject]
+                    let routesArray = (mapResponse["routes"] as? Array) ?? []
+                    let routes = (routesArray.first as? Dictionary<String, AnyObject>) ?? [:]
+                    
+                    //print(duration["text"])
+                    
+                    let overviewPolyline = (routes["overview_polyline"] as? Dictionary<String,AnyObject>) ?? [:]
+                    let polypoints = (overviewPolyline["points"] as? String) ?? ""
+                    let line  = polypoints
+                    
+                    self.add_path_on_google_maps_from(encodedString: line)
+                    
+                }
+            }
+        
+        //animate down menu going up and setting destination text label
+        destination_label.text = "("+usc_location.abbreviation + ") " + usc_location.name
+        location_textfield.text = ""
+        navigation_constraint.constant = 0
+        UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded()})
+ 
+    }
+    
+    func add_path_on_google_maps_from(encodedString: String) {
+        self.polyline.map = nil
         let path = GMSMutablePath(fromEncodedPath: encodedString)
         //print(encodedString)
         
@@ -396,14 +463,17 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         polyline.map = mapView
         
         //shift camera
-        let bounds = GMSCoordinateBounds(path: path!)
-        self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
-        
+        //let bounds = GMSCoordinateBounds(path: path!)
+        //self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 120.0))
     }
     
-    
-    
-    
+    func close_side_and_bottom_menus()
+    {
+        menu_constraint.constant = -140
+        navigation_constraint.constant = -230
+        UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded()})
+        menu_showing = false
+    }
 }
 
 
