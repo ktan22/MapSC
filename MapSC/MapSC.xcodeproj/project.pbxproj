@@ -14,6 +14,7 @@
 		303B55851EEE2C9700A0E86B /* MapSC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 303B55831EEE2C9700A0E86B /* MapSC.xcdatamodeld */; };
 		303B55871EEE2C9700A0E86B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 303B55861EEE2C9700A0E86B /* Assets.xcassets */; };
 		303B558A1EEE2C9700A0E86B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 303B55881EEE2C9700A0E86B /* LaunchScreen.storyboard */; };
+		304B61E51F2C7AA600584892 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304B61E41F2C7AA600584892 /* StringExtension.swift */; };
 		30A49D331EF4F2DB00CED2A4 /* UscLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A49D321EF4F2DB00CED2A4 /* UscLocation.swift */; };
 		30A49D351EF5197D00CED2A4 /* LocationImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A49D341EF5197D00CED2A4 /* LocationImageManager.swift */; };
 		30C3F9961EF3A32A009549FC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C3F9951EF3A32A009549FC /* Model.swift */; };
@@ -29,6 +30,7 @@
 		303B55861EEE2C9700A0E86B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		303B55891EEE2C9700A0E86B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		303B558B1EEE2C9700A0E86B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		304B61E41F2C7AA600584892 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		30A49D321EF4F2DB00CED2A4 /* UscLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UscLocation.swift; sourceTree = "<group>"; };
 		30A49D341EF5197D00CED2A4 /* LocationImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationImageManager.swift; sourceTree = "<group>"; };
 		30C3F9951EF3A32A009549FC /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				30C3F99D1EF3CA0D009549FC /* usc_locations.swift */,
 				303B557C1EEE2C9700A0E86B /* AppDelegate.swift */,
 				303B557E1EEE2C9700A0E86B /* ViewController.swift */,
+				304B61E41F2C7AA600584892 /* StringExtension.swift */,
 				303B55801EEE2C9700A0E86B /* Main.storyboard */,
 				303B55861EEE2C9700A0E86B /* Assets.xcassets */,
 				303B55881EEE2C9700A0E86B /* LaunchScreen.storyboard */,
@@ -231,6 +234,7 @@
 				303B55851EEE2C9700A0E86B /* MapSC.xcdatamodeld in Sources */,
 				30A49D331EF4F2DB00CED2A4 /* UscLocation.swift in Sources */,
 				303B557D1EEE2C9700A0E86B /* AppDelegate.swift in Sources */,
+				304B61E51F2C7AA600584892 /* StringExtension.swift in Sources */,
 				30A49D351EF5197D00CED2A4 /* LocationImageManager.swift in Sources */,
 				30C3F99E1EF3CA0D009549FC /* usc_locations.swift in Sources */,
 				30C3F9961EF3A32A009549FC /* Model.swift in Sources */,

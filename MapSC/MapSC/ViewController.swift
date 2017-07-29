@@ -272,21 +272,111 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         cur_phone_angle = Double(heading.magneticHeading)
     }
     
+    //looks through the location database to find a match for user's search input
+    func find_usc_location(word: String) -> String
+    {
+        var location = ""   //holds key of the desired location
+        
+        // Create a CharacterSet of delimiters to parse user search input
+        let separators = CharacterSet(charactersIn: ":,-, ,(,),,")
+        let trimmed_word = word.trimmed()
+        var search_words : [String] = trimmed_word.components(separatedBy: separators)
+        
+        //exclude empty words
+        search_words = search_words.filter {
+            (x) -> Bool in !x.isEmpty
+        }
+        
+        print(search_words)
+        
+        //check for match with building code first
+        if (ConstantMap.usc_map[word.uppercased()] != nil) {
+            location = word.uppercased()
+            return location
+        }
+        
+        
+        //check if id is exact match for *one word* search inputs only to avoid
+        //mixing up with building addresses
+        if (search_words.count == 1) {
+            for (key, value) in ConstantMap.usc_map {
+                if (value["id"] == search_words[0]) {
+                    location = key
+                    return location
+                }
+            }
+        }
+        
+        //iterate through database to check each location's address and name for a match
+        for (key, value) in ConstantMap.usc_map {
+            var found = true
+            var address : [String] = value["address"]!.lowercased().components(separatedBy: separators)
+            address = address.filter { (x) -> Bool in !x.isEmpty }
+            var name : [String] = value["name"]!.lowercased().components(separatedBy: separators)
+            name = name.filter { (x) -> Bool in !x.isEmpty }
+            print(name)
+            
+            //check if location contains exact match of all words in user's search input
+            for word in search_words {
+                print(word)
+                if (address.contains(word.lowercased()) || name.contains(word.lowercased())) {
+                    continue
+                }
+                else {
+                    found = false
+                    break
+                }
+            }
+            
+            //found an exact match
+            if (found) {
+                location = key;
+                return location;
+            }
+        }
+        
+        //look for nonexact match if no exact match was found
+        for (key, value) in ConstantMap.usc_map {
+            var found = true
+            for word in search_words {
+                if (value["address"]!.lowercased().range(of:word.lowercased()) != nil) {
+                    continue
+                }
+                else if (value["name"]!.lowercased().range(of:word.lowercased()) != nil) {
+                    continue
+                }
+                else {
+                    found = false
+                    break
+                }
+            }
+            if (found) {
+                location = key
+                return location
+            }
+        }
+        return location
+    }
+    
     //Search local usc building database for input string
     //If match, then update usc_location variable with information
     //If no match, then return false
     func get_lat_long_from_dest_address_in_usc_map(word: String) -> Bool
     {
-        if(ConstantMap.usc_map[word.uppercased()] == nil)
-        {
+        let matched_key = find_usc_location(word: word)
+        
+        //exist function if no location was found
+        if (matched_key == "") {
+            print("Location not found at USC. Try Again.")
             return false
         }
         
-        let dict = ConstantMap.usc_map[word.uppercased()]!
+        let dict = ConstantMap.usc_map[matched_key]!
+        
         let lookup_address = dict["address"]!
         let lookup_name = dict["name"]!
         let lookup_id = dict["id"]!
-        let lookup_abbreviation = word.uppercased()
+        let lookup_abbreviation = matched_key
         
         let address_request = (lookup_address).replacingOccurrences(of: " ", with: "+")
         let get_request = "https://maps.googleapis.com/maps/api/geocode/json?address=\(address_request)&key=AIzaSyBIIkq2aJwHsjwujPSptKQXJeyCeQQvTjE"
