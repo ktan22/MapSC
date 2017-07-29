@@ -7,6 +7,7 @@ import Foundation
  Information include: id, name, address
  */
 struct ConstantMap{
+    
 	static let usc_map = [
 		"PSA":
 			["id": "191", "name": "PARKING STRUCTURE A", "address": "LOT 33-3667 MCCLINTOCK AVE. LOS ANGELES CA 90089"],
@@ -843,5 +844,49 @@ struct ConstantMap{
 		"PSB":
 			["id": "192", "name": "PARKING STRUCTURE B", "address": "LOT 1-1150 WEST JEFFERSON BLVD"]
     ]
+    
+    
+    static let usc_dining = [
+        ["name": "Annenberg Cart", "image": "annenberg_cart_upc.jpg", "code": "ASC", "lat": "34.022034", "lng": "-118.28615400000001", "content": "Grab & go items, pastries and handcrafted CBTL beverages"],
+        ["name": "Bashor Lounge", "image": "Bashor.jpg", "code": "HER", "lat": "34.0225539", "lng": "-118.286786", "content": "Bashor is the perfect location to impress your guests at USC. The warm ambiance with USC acclaimed sports history, features a unique foyer with sports memorabilia, an existing bar, and options for patio usage. Bashor can fit up to 80 people and has AV capabilities."],
+        ["name": "Cafe 84", "image": "Cafe84.jpg", "code": "KOH", "lat": "34.024759", "lng": "-118.28797500000002", "content": "Action and stations featuring healthy options served buffet-style, full salad bar, homemade soups and LSO station (all-you-care-to-eat). Part of the meal plan program, but also open for cash and credit card purchase."],
+        ["name": "California Pizza Kitchen", "image": "cal-pizza-kitchen.jpg", "code": "TCC", "lat": "34.0205006516479", "lng": "-118.286163210869", "content": "Hearth-baked CPK signature pizzas, pasta, salads, soups and sandwiches"],
+        ["name": "Cammilleri Cafe", "image": "CAM_Featured_700x294.jpg", "code": "", "lat": "34.01875657645568", "lng": "-118.28380570632936", "content": "A wide variety of grab and go items including gourmet sandwiches, salads, pastries and premium coffee and specialty teas."],
+        ["name": "Coffee Bean & Tea Leaf", "image": "coffee_bean_upc.jpg", "code": "TCC", "lat": "34.0201068814461", "lng": "-118.286329507828", "content": "Carefully handcrafted coffees, teas, blended beverages, pastries and grab & go items"],
+        ["name": "Coffee Bean & Tea Leaf (Cinema)", "image": "coffee_bean_upc1.jpg", "code": "SCA", "lat": "34.0233381", "lng": "-118.28719849999999", "content": ""],
+        ["name": "Davidson Conference Center (Vineyard Room)", "image": "DavidsonConferenceCenter.jpg", "code": "DCC", "lat": "34.0216459", "lng": "-118.2806703", "content": "Located within the Davidson Conference Center, the Vineyard Room is a great location for a social or private gathering."],
+        ["name": "Everybody's Kitchen", "image": "EVK.jpg", "code": "BSR", "lat": "34.021389", "lng": "-118.28212289999999", "content": "Home style menu served buffet-style format as well as exhibition-style cooking, full salad & sandwich bar (all-you-care-to eat).  Part of the meal plan program, but also open for cash and credit card purchase."],
+        ["name": "Fertitta Cafe", "image": "sushi.jpg", "code": "ASC", "lat": "34.022034", "lng": "-118.28615400000001", "content": ""],
+        ["name": "Law School Cafe", "image": "law_school_cafe_upc.jpg", "code": "LAW", "lat": "34.018762", "lng": "-118.28453400000001", "content": "Salmon bowls, Boba Tea, sandwiches, salads, grab & go items and Peets coffee beverages"],
+        ["name": "Lemonade", "image": "lemonade_upc.jpg", "code": "TCC", "lat": "34.0206143083389", "lng": "-118.286115266383", "content": "Seasonal California comfort food featuring marketplace salads, sandwiches, slow simmered stews, desserts and delicious lemonade flavors"],
+        ["name": "Literatea", "image": "literatea_upc.jpg", "code": "DML", "lat": "34.020158", "lng": "-118.283657", "content": "Serving tea, coffee, grab & go items and the best oatmeal on campus!"],
+        ["name": "Little Galen", "image": "little_galen_upc.jpg", "code": "GAP", "lat": "34.02096", "lng": "-118.27992499999999", "content": ""],
+        ["name": "McKays", "image": "mckays.jpg", "code": "RMH", "lat": "34.019569", "lng": "-118.28098599999998", "content": "Full Service Restaurant, Fine Dining - Fresh salads, tasty appetizers, fish/poultry/steak or pasta entrees, desserts"],
+        ["name": "Moreton Fig", "image": "moreton-fig.jpg", "code": "TCC", "lat": "34.019853", "lng": "-118.28599500000001", "content": "Full Service Restaurant, Fine Dining - Farm-to-Table gourmet, California cuisine, full bar with incredible California wine selections"],
+        ["name": "Nekter at Shop Cafe", "image": "shop_cafe_upc.jpg", "code": "HAR", "lat": "34.01886500665938", "lng": "-118.28776760118865", "content": "Handcrafted smoothies, juices, pastries, grab & go items and DRNK coffee beverages. Bypass the line...pre-order using Tapingo!"],
+        ["name": "Panda Express UPC", "image": "panda_express_upc.jpg", "code": "TCC", "lat": "34.0204317350472", "lng": "-118.286248706281", "content": "Variety of American Chinese entrees paired with friend rice, steamed rice, chow mein or mixed veggies"],
+        ["name": "Panda Express HSC", "image": "panda_express_hsc.jpg", "code": "SRH", "lat": "34.0606272", "lng": "-118.20572170000003", "content": "WOK ON OVER! Panda Express combines classic Chinese flavors and fresh ingredients in a popular dining experience that has become legendary."],
+        ["name": "Parkside Restaurant & Grill", "image": "Parkside.jpg", "code": "IRC", "lat": "34.019375", "lng": "-118.29096800000002", "content": "Trend-current International cuisine in an exhibition-style format served buffet style (all-you-care-to eat)."],
+        ["name": "Plaza Marketplace", "image": "plaza_marketplace_hsc.jpg", "code": "SRH", "lat": "34.0600583", "lng": "-118.20605060000003", "content": "Plaza Marketplace specializes in quick and healthy dining for easy pick up. Menus feature made to order Sandwich and Freshly Tossed Salad stations and our new Healthy Corner and Seeds breakfast items."],
+        ["name": "Popovich Cafe", "image": "IMG_9010-2.jpg", "code": "JKP", "lat": "34.0187469", "lng": "-118.2829582", "content": "Mediterranean inspired sandwiches, wraps, salads, Portos pastries and baked items, Sambazon Acai bowls and illy coffee & handcrafted beverages."],
+        ["name": "Qwench Juice Bar", "image": "QWENCH_stacked.jpg", "code": "ZNI", "lat": "34.0619767", "lng": "-118.20362469999998", "content": "Qwench is an innovative and evolutionary response to an emergent food trend focused on fresh ingredients natural tastes and flavors, elevated nutrition, and powerful superfoods. To achieve thirst-quenching taste, we use raw fruit and vegetable juice, always squeezed-to-order."],
+        ["name": "Ronald Tutor Campus Center", "image": "RTCC.jpg", "code": "RTCC", "lat": "34.020046", "lng": "-118.28644500000001", "content": "The Trojan Grand Ballroom, appointed with close to 9,000 square feet of pillar-free space is the ideal location for meetings, conferences and banquets."],
+        ["name": "Rosso Oro's", "image": "Rossos-2.jpg", "code": "", "lat": "34.0199032", "lng": "-118.2805194", "content": "New York-style thin crust pizza, lasagna, salads, beer and wine"],
+        ["name": "Seeds", "image": "seeds_upc.jpg", "code": "TCC", "lat": "34.0206031927768", "lng": "-118.286045193672", "content": "Handcrafted, made-to-order sandwiches & salads, gourmet sausages, rotisserie, desserts and full market"],
+        ["name": "Seeds Marketplace", "image": "seeds_hsc.jpg", "code": "SSB", "lat": "34.0654543", "lng": "-118.19732579999999", "content": "Located on the ground floor of the Soto Building, Seeds Marketplace (aka Seeds North) offers several UPC favorites with specialty items just for HSC. Delightfully delicious salads, sandwiches and smoothies are all handcrafted and customizable."],
+        ["name": "Starbucks", "image": "starbucks_hsc.jpg", "code": "SRH", "lat": "34.0606272", "lng": "-118.20572170000003", "content": "USC is proud to offer the worlds best known coffee, prepared just the way you like it. Non-fat, no foam, half-caf vanilla late? No problem."],
+        ["name": "Starbucks at Trojan Grounds", "image": "starbucks_upc.jpg", "code": "BSR", "lat": "34.0212974", "lng": "-118.28259049999997", "content": "Full line of Starbucks coffee beverages, premium Tazo Teas, fine pastries and other delectables.  Bypass the line...pre-order using Tapingo!"],
+        ["name": "The Cafe", "image": "annenberg_cafe_upc.jpg", "code": "ASC", "lat": "34.020777", "lng": "-118.28697599999998", "content": ""],
+        ["name": "The Edmondson (Health Sciences Campus)", "image": "edmonson.jpg", "code": "EFC", "lat": "34.0606272", "lng": "-118.20572170000003", "content": "The Edmondson Faculty Center is based on a farm-to-fork concept created by USC Hospitality located at the Health Science Campus."],
+        ["name": "The Habit Burger Grill", "image": "habit_upc.jpg", "code": "TCC", "lat": "34.0201288348082", "lng": "-118.286421373487", "content": "Charbroiled burgers, sandwiches, salads, fries and shakes"],
+        ["name": "The Lab Gastropub", "image": "the-lab.jpg", "code": "", "lat": "34.019907", "lng": "-118.28056700000002", "content": "Full Service Restaurant - Gastropub Classics"],
+        ["name": "Town & Gown", "image": "TownGown.jpg", "code": "TGF", "lat": "34.019116", "lng": "-118.28424799999999", "content": "Town and Gown is the premier ballroom on the USC campus and is the preferred location for lunches, galas and celebrations (including weddings!)."],
+        ["name": "Traditions", "image": "traditions.jpg", "code": "TCC", "lat": "34.019964", "lng": "-118.28616199999999", "content": "Bar and Grill - Appetizers, burgers, sandwiches and, full bar with a great selection of on-tap and bottled beers."],
+        ["name": "Tutor Hall Cafe", "image": "tutor_hall_cafe_upc.jpg", "code": "RTH", "lat": "34.020035", "lng": "-118.289718", "content": "International flavors - Bahn Mi sandwiches, noodle bowls, Indian cuisine, grab & go items and DRNK coffee beverages"],
+        ["name": "University Club D", "image": "UClub_Dining_Thumbnail.jpg", "code": "", "lat": "34.02260130831641", "lng": "-118.28375940412138", "content": "Full Service Restaurant, Fine Dining - Members only"],
+        ["name": "University Club C", "image": "UClub_Catering_Thumbnail.jpg", "code": "", "lat": "34.02259471722757", "lng": "-118.28378471116946", "content": "The University Club is appointed with seven meeting rooms to accommodate private events."],
+        ["name": "URBNMRKT", "image": "urbnmrkt_upc.jpg", "code": "CAL", "lat": "34.0190482", "lng": "-118.27638589999998", "content": "Daily salad, sandwich and entree specials, grab & go items and Peets Coffee"],
+        ["name": "Verde", "image": "verde_upc.jpg", "code": "TCC", "lat": "34.0202964026887", "lng": "-118.286341242492", "content": "Made to order burritos and bowls using fresh grilled proteins and fresh ingredients"]
+        ]
 
 };
