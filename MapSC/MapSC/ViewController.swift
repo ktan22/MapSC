@@ -12,7 +12,7 @@ import CoreLocation
 import Alamofire
 import GooglePlacePicker
 
-class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDelegate {
+class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDelegate, UITextFieldDelegate {
 
     //The overall map view displaying google maps that is spliced across the screen
     lazy var mapView = GMSMapView()
@@ -102,7 +102,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     //Action linked to the press of the "search" button: Take the contents of the text field
     //and try to get a USC location out of it using the usc_location.swift local database
     //If match not found, do nothing
-    @IBAction func search(_ sender: Any) {
+    @IBAction func search(_ sender: Any?) {
         let word = location_textfield.text
         
         set_default_values()
@@ -116,9 +116,19 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        self.search(nil)
+        return true
+    }
+    
+    
     //Function that happens when the view comes into play: Include all setup code here
     override func viewDidLoad() {
         super.viewDidLoad()
+        location_textfield.returnKeyType =  UIReturnKeyType.search
+        location_textfield.delegate = self;
         
         //Location manager initialization to get current location. Make sure to
         // set info.plist "Privacy - Location When In Use Usage Description" to enable the setting as well
@@ -161,8 +171,96 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         
         let l = (self.locationManager.location?.coordinate)!
         curLocation = l
-        curLocation = CLLocationCoordinate2D(latitude: 34.0220386047, longitude: -118.2878178101) //For testing closer locations only
+
+        //curLocation = CLLocationCoordinate2D(latitude: 34.1220386047, longitude: -118.2878178101) For testing closer locations only
+
         mapView.isMyLocationEnabled = true
+    }
+    
+    //looks through the location database to find a match for user's search input
+    func find_usc_location(word: String) -> String
+    {
+        var location = ""   //holds key of the desired location
+        
+        // Create a CharacterSet of delimiters to parse user search input
+        let separators = CharacterSet(charactersIn: ":,-, ,(,),,")
+        let trimmed_word = word.trimmingCharacters(in: .whitespaces)
+        var search_words : [String] = trimmed_word.components(separatedBy: separators)
+        
+        //exclude empty words
+        search_words = search_words.filter {
+            (x) -> Bool in !x.isEmpty
+        }
+        
+        print(search_words)
+        
+        //check for match with building code first
+        if (ConstantMap.usc_map[word.uppercased()] != nil) {
+            location = word.uppercased()
+            return location
+        }
+        
+        
+        //check if id is exact match for *one word* search inputs only to avoid
+        //mixing up with building addresses
+        if (search_words.count == 1) {
+            for (key, value) in ConstantMap.usc_map {
+                if (value["id"] == search_words[0]) {
+                    location = key
+                    return location
+                }
+            }
+        }
+        
+        //iterate through database to check each location's address and name for a match
+        for (key, value) in ConstantMap.usc_map {
+            var found = true
+            var address : [String] = value["address"]!.lowercased().components(separatedBy: separators)
+            address = address.filter { (x) -> Bool in !x.isEmpty }
+            var name : [String] = value["name"]!.lowercased().components(separatedBy: separators)
+            name = name.filter { (x) -> Bool in !x.isEmpty }
+            print(name)
+            
+            //check if location contains exact match of all words in user's search input
+            for word in search_words {
+                print(word)
+                if (address.contains(word.lowercased()) || name.contains(word.lowercased())) {
+                    continue
+                }
+                else {
+                    found = false
+                    break
+                }
+            }
+            
+            //found an exact match
+            if (found) {
+                location = key;
+                return location;
+            }
+        }
+        
+        //look for nonexact match if no exact match was found
+        for (key, value) in ConstantMap.usc_map {
+            var found = true
+            for word in search_words {
+                if (value["address"]!.lowercased().range(of:word.lowercased()) != nil) {
+                    continue
+                }
+                else if (value["name"]!.lowercased().range(of:word.lowercased()) != nil) {
+                    continue
+                }
+                else {
+                    found = false
+                    break
+                }
+            }
+            if (found) {
+                location = key
+                return location
+            }
+        }
+        return location
     }
     
     //Search local usc building database for input string
@@ -170,18 +268,20 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     //If no match, then return false
     func grab_usc_locations(word: String) -> Bool
     {
-        if(ConstantMap.usc_map[word.uppercased()] == nil)
-        {
+        let matched_key = find_usc_location(word: word)
+        
+        //exist function if no location was found
+        if (matched_key == "") {
             print("Location not found at USC. Try Again.")
             return false
         }
         
-        let dict = ConstantMap.usc_map[word.uppercased()]!
+        let dict = ConstantMap.usc_map[matched_key]!
         
         let lookup_address = dict["address"]!
         let lookup_name = dict["name"]!
         let lookup_id = dict["id"]!
-        let lookup_abbreviation = word.uppercased()
+        let lookup_abbreviation = matched_key
         
         usc_location.name = lookup_name
         usc_location.address = lookup_address
