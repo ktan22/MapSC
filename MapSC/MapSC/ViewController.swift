@@ -449,7 +449,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         location_textfield.text = ""
         navigation_constraint.constant = 0
         UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded()})
- 
+        
     }
     
     func add_path_on_google_maps_from(encodedString: String) {
