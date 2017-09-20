@@ -20,6 +20,8 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     //Current location of user stored in a variable
     var cur_user_location = CLLocationCoordinate2D()
     var cur_phone_angle = 0.0
+    var directory_string = ""
+    
     
     //Location manager that keeps track of user location: from CoreLocation API
     var location_manager = CLLocationManager()
@@ -39,6 +41,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     //The other IBOutlets that fill up the page
     
     @IBOutlet weak var content_label: UILabel!
+    
     
     @IBOutlet weak var usc_location_image: UIImageView!
     @IBOutlet weak var navigate_button: UIButton!
@@ -64,22 +67,17 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     
     //BUTTONS
     @IBAction func dining_filter_button_pressed(_ sender: Any) {
-        move_camera_to(to: "USC")
-        set_default_values()
-        
-        for location in ConstantMap.usc_dining
-        {
-            let name = location["name"]
-            let content = location["content"]
-            let lat = CLLocationDegrees(location["lat"]!)
-            let long = CLLocationDegrees(location["lng"]!)
-            let marker_dining = GMSMarker(position: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
-            marker_dining.title = name
-            marker_dining.map = self.mapView
-            marker_dining.snippet = content
-        }
-        
+        filter(with: "DINING")
     }
+    
+    @IBAction func athletics_filter_button_pressed(_ sender: Any) {
+        filter(with: "ATHLETICS")
+    }
+    
+    @IBAction func libraries_filter_button_pressed(_ sender: Any) {
+        filter(with: "LIBRARIES")
+    }
+    
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
@@ -104,6 +102,51 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
                 //marker.tracksInfoWindowChanges = true
                 self.usc_location.set_up_values(name: loc_name, address: "", abbreviation: code, id: "", coordinate: coordinate, content: marker.snippet!, image_named: image_name)
                 self.display_dest_usc_location_info_using_lat_long()
+                return true
+            }
+        }
+        for location in ConstantMap.usc_athletics
+        {
+            if(String(name!) == String(location["name"]!))
+            {
+                var code = String(describing: location["code"]!)
+                let lat = CLLocationDegrees(location["lat"]!)
+                let long = CLLocationDegrees(location["lng"]!)
+                let image_name = String(describing: location["image"]!)
+                let loc_name = String(describing: location["name"]!)
+                let coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+                
+                if(code == "")
+                {
+                    code = String(describing: String(name!).characters.first!)
+                }
+                //self.marker = marker
+                //marker.tracksInfoWindowChanges = true
+                self.usc_location.set_up_values(name: loc_name, address: "", abbreviation: code, id: "", coordinate: coordinate, content: marker.snippet!, image_named: image_name)
+                self.display_dest_usc_location_info_using_lat_long()
+                return true
+            }
+        }
+        for location in ConstantMap.usc_libraries
+        {
+            if(String(name!) == String(location["name"]!))
+            {
+                var code = String(describing: location["code"]!)
+                let lat = CLLocationDegrees(location["lat"]!)
+                let long = CLLocationDegrees(location["lng"]!)
+                let image_name = String(describing: location["image"]!)
+                let loc_name = String(describing: location["name"]!)
+                let coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+                
+                if(code == "")
+                {
+                    code = String(describing: String(name!).characters.first!)
+                }
+                //self.marker = marker
+                //marker.tracksInfoWindowChanges = true
+                self.usc_location.set_up_values(name: loc_name, address: "", abbreviation: code, id: "", coordinate: coordinate, content: marker.snippet!, image_named: image_name)
+                self.display_dest_usc_location_info_using_lat_long()
+                return true
             }
         }
 
@@ -159,6 +202,8 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
             move_camera_to(to: "USC")
         case 1:
             move_camera_to(to: "ME")
+        case 2:
+            move_camera_to(to: "HSC")
         default:
             break;
         }
@@ -212,6 +257,18 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         return true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        let search = UserDefaults.standard.string(forKey: "directory_search")
+        if((search) != nil)
+        {
+            set_default_values()
+            //print(search)
+            get_lat_long_from_dest_address_in_usc_map(word: search!)
+            UserDefaults.standard.removeObject(forKey: "directory_search")
+        }
+    }
+
+    
     
     //Function that happens when the view comes into play: Include all setup code here
     override func viewDidLoad() {
@@ -263,7 +320,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         
         let l = (self.location_manager.location?.coordinate)!
         cur_user_location = l
-        cur_user_location = CLLocationCoordinate2D(latitude: 34.0220386047, longitude: -118.2878178101) //For testing closer locations only
+        //cur_user_location = CLLocationCoordinate2D(latitude: 34.0220386047, longitude: -118.2878178101) //For testing closer locations only
         mapView.isMyLocationEnabled = true
     }
     
@@ -287,7 +344,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
             (x) -> Bool in !x.isEmpty
         }
         
-        print(search_words)
+        //print(search_words)
         
         //check for match with building code first
         if (ConstantMap.usc_map[word.uppercased()] != nil) {
@@ -462,6 +519,61 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
             let camera = GMSCameraPosition.camera(withLatitude: self.usc_location.coordinate.latitude, longitude: self.usc_location.coordinate.longitude, zoom: 18.0)
             self.mapView.animate(to: camera)
         }
+        else if(to == "HSC")
+        {
+            let camera = GMSCameraPosition.camera(withLatitude: 34.0595, longitude: -118.2082, zoom: 15.0)
+            self.mapView.animate(to: camera)
+        }
+    }
+    
+    func filter(with: String)
+    {
+        move_camera_to(to: "USC")
+        set_default_values()
+        
+        if (with == "DINING")
+        {
+            for location in ConstantMap.usc_dining
+            {
+                let name = location["name"]
+                let content = location["content"]
+                let lat = CLLocationDegrees(location["lat"]!)
+                let long = CLLocationDegrees(location["lng"]!)
+                let marker_dining = GMSMarker(position: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
+                marker_dining.title = name
+                marker_dining.map = self.mapView
+                marker_dining.snippet = content
+            }
+        }
+        else if (with == "ATHLETICS")
+        {
+            for location in ConstantMap.usc_athletics
+            {
+                let name = location["name"]
+                let content = location["content"]
+                let lat = CLLocationDegrees(location["lat"]!)
+                let long = CLLocationDegrees(location["lng"]!)
+                let marker_dining = GMSMarker(position: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
+                marker_dining.title = name
+                marker_dining.map = self.mapView
+                marker_dining.snippet = content
+            }
+        }
+        else if (with == "LIBRARIES")
+        {
+            for location in ConstantMap.usc_libraries
+            {
+                let name = location["name"]
+                let content = location["content"]
+                let lat = CLLocationDegrees(location["lat"]!)
+                let long = CLLocationDegrees(location["lng"]!)
+                let marker_dining = GMSMarker(position: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
+                marker_dining.title = name
+                marker_dining.map = self.mapView
+                marker_dining.snippet = content
+            }
+        }
+        
     }
     
     //make sure usc_location is set before calling this function!
