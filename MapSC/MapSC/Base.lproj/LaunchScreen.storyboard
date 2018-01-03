@@ -1,7 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,12 +21,92 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gt-cs-OhK">
+                                <rect key="frame" x="16" y="259" width="121" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="121" id="00d-nI-dB0"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="by">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="17" name="SnellRoundhand-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCN-wk-s5E">
+                                <rect key="frame" x="75" y="309" width="121" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="121" id="D7L-0t-coQ"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="for">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="17" name="SnellRoundhand-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vYe-eO-7ag">
+                                <rect key="frame" x="78" y="259" width="174" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="174" id="kxu-rd-MTe"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Trojans">
+                                        <attributes>
+                                            <color key="NSColor" red="0.58332413429999996" green="4.5332212720000002e-06" blue="0.0045600575390000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="40" name="SnellRoundhand-Black"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfX-Gp-feK">
+                                <rect key="frame" x="132" y="305" width="227" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="227" id="JcG-WB-ciZ"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Trojans...">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="0.80144375560000003" blue="0.0046433899549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="40" name="SnellRoundhand-Black"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfX-Gp-feK" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="6cI-j4-rOu"/>
+                            <constraint firstItem="4Gt-cs-OhK" firstAttribute="bottom" secondItem="vYe-eO-7ag" secondAttribute="bottom" id="7an-3i-0FG"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="4Gt-cs-OhK" secondAttribute="bottom" constant="340" id="8zq-x5-M6B"/>
+                            <constraint firstItem="WCN-wk-s5E" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="59" id="C3q-ya-U5X"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="wfX-Gp-feK" secondAttribute="bottom" constant="294" id="DQG-IV-DHd"/>
+                            <constraint firstItem="4Gt-cs-OhK" firstAttribute="top" secondItem="vYe-eO-7ag" secondAttribute="top" id="YTC-lM-HXn"/>
+                            <constraint firstItem="vYe-eO-7ag" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="62" id="eiT-Yl-lTs"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="WCN-wk-s5E" secondAttribute="bottom" constant="290" id="hbB-ms-Dju"/>
+                            <constraint firstItem="wfX-Gp-feK" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="285" id="msm-04-kxA"/>
+                            <constraint firstItem="WCN-wk-s5E" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="289" id="sqa-tJ-RP7"/>
+                            <constraint firstItem="4Gt-cs-OhK" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="wBK-Zv-5W4"/>
+                            <constraint firstItem="4Gt-cs-OhK" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="239" id="z8n-V2-oIp"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
 </document>

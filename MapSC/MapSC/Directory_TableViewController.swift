@@ -16,12 +16,12 @@ class Directory_TableViewController: UITableViewController {
         let abbrev : String
     }
     var scope = "All"
-    var unique = [String]()
     var array_objects = [Location]()
+    var filtered_locations = [Location]()
+    var dining_locations = [Location]()
     var library_locations = [Location]()
     var athletic_locations = [Location]()
-    var food_locations = [Location]()
-    var filtered_locations = [Location]()
+    var village_locations = [Location]()
     let searchController = UISearchController(searchResultsController: nil)
     var search_string = ""
     
@@ -37,57 +37,36 @@ class Directory_TableViewController: UITableViewController {
         for (key,value) in ConstantMap.usc_map{
             let n = value["name"]
             let loc = Location(name: n!, abbrev: key)
-            
-            if(!unique.contains(loc.name.lowercased()))
-            {
-                array_objects.append(loc)
-                unique.append(loc.name.lowercased())
-            }
+    
+            array_objects.append(loc)
         }
         
         for loc in ConstantMap.usc_dining{
-            let n = loc["name"]
-            var a = loc["code"]
-            if (a == ""){
-                a = String(describing: String(n!).characters.first!)
-            }
-            let loc = Location(name: n!, abbrev: a!)
-            food_locations.append(loc)
-            if(!unique.contains(loc.name.lowercased()))
-            {
-                array_objects.append(loc)
-                unique.append(loc.name.lowercased())
-            }
+            let n = ConstantMap.usc_map[loc]?["name"]
+        
+            let l = Location(name: n!, abbrev: loc)
+            dining_locations.append(l)
         }
         
         for loc in ConstantMap.usc_athletics{
-            let n = loc["name"]
-            var a = loc["code"]
-            if (a == ""){
-                a = String(describing: String(n!).characters.first!)
-            }
-            let loc = Location(name: n!, abbrev: a!)
-            athletic_locations.append(loc)
-            if(!unique.contains(loc.name.lowercased()))
-            {
-                array_objects.append(loc)
-                unique.append(loc.name.lowercased())
-            }
+            let n = ConstantMap.usc_map[loc]?["name"]
+            
+            let l = Location(name: n!, abbrev: loc)
+            athletic_locations.append(l)
         }
         
         for loc in ConstantMap.usc_libraries{
-            let n = loc["name"]
-            var a = loc["code"]
-            if (a == ""){
-                a = String(describing: String(n!).characters.first!)
-            }
-            let loc = Location(name: n!, abbrev: a!)
-            library_locations.append(loc)
-            if(!unique.contains(loc.name.lowercased()))
-            {
-                array_objects.append(loc)
-                unique.append(loc.name.lowercased())
-            }
+            let n = ConstantMap.usc_map[loc]?["name"]
+            
+            let l = Location(name: n!, abbrev: loc)
+            library_locations.append(l)
+        }
+        
+        for loc in ConstantMap.usc_village{
+            let n = ConstantMap.usc_map[loc]?["name"]
+            
+            let l = Location(name: n!, abbrev: loc)
+            village_locations.append(l)
         }
         
         // Setup the Search Controller
@@ -99,6 +78,7 @@ class Directory_TableViewController: UITableViewController {
         searchController.searchBar.scopeButtonTitles = ["All","Libraries", "Athletics", "Food", "Village"]
         tableView.tableHeaderView = searchController.searchBar
         searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Abbrev or name (e.g. rth)"
         //view.addSubview(searchBar)
 
     }
@@ -123,7 +103,7 @@ class Directory_TableViewController: UITableViewController {
             return filtered_locations.count
         }
         
-        let size = ConstantMap.usc_map.count + ConstantMap.usc_dining.count
+        let size = ConstantMap.usc_map.count
         return size
     }
 
@@ -162,7 +142,15 @@ class Directory_TableViewController: UITableViewController {
         }
         else if(scope == "Food")
         {
-            filtered_locations = food_locations.filter {location in
+            filtered_locations = dining_locations.filter {location in
+                let isMatching = location.name.lowercased().contains(searchText.lowercased()) || location.abbrev.lowercased().contains(searchText.lowercased()) || searchText == "";
+                return isMatching
+            }
+            
+        }
+        else if(scope == "Village")
+        {
+            filtered_locations = village_locations.filter {location in
                 let isMatching = location.name.lowercased().contains(searchText.lowercased()) || location.abbrev.lowercased().contains(searchText.lowercased()) || searchText == "";
                 return isMatching
             }
@@ -233,7 +221,7 @@ class Directory_TableViewController: UITableViewController {
             self.search_string = array_objects[indexPath.row].name
         }
         //self.performSegue(withIdentifier: "directory_search", sender: nil)
-        
+        searchController.isActive = false
         self.tabBarController?.selectedIndex = 0
         let defaults : UserDefaults = UserDefaults.standard
         defaults.set(search_string, forKey: "directory_search")
