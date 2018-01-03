@@ -20,6 +20,8 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     //Current location of user stored in a variable
     var cur_user_location = CLLocationCoordinate2D()
     var cur_phone_angle = 0.0
+    var directory_string = ""
+    
     
     //Location manager that keeps track of user location: from CoreLocation API
     var location_manager = CLLocationManager()
@@ -39,6 +41,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     //The other IBOutlets that fill up the page
     
     @IBOutlet weak var content_label: UILabel!
+    
     
     @IBOutlet weak var usc_location_image: UIImageView!
     @IBOutlet weak var navigate_button: UIButton!
@@ -64,46 +67,59 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
     
     //BUTTONS
     @IBAction func dining_filter_button_pressed(_ sender: Any) {
-        move_camera_to(to: "USC")
-        set_default_values()
-        
-        for location in ConstantMap.usc_dining
-        {
-            let name = location["name"]
-            let content = location["content"]
-            let lat = CLLocationDegrees(location["lat"]!)
-            let long = CLLocationDegrees(location["lng"]!)
-            let marker_dining = GMSMarker(position: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
-            marker_dining.title = name
-            marker_dining.map = self.mapView
-            marker_dining.snippet = content
-        }
-        
+        filter(with: "DINING")
+    }
+    @IBAction func village_filter_button_pressed(_ sender: Any) {
+        filter(with: "VILLAGE")
     }
     
+    @IBAction func athletics_filter_button_pressed(_ sender: Any) {
+        filter(with: "ATHLETICS")
+    }
+    
+    @IBAction func libraries_filter_button_pressed(_ sender: Any) {
+        filter(with: "LIBRARIES")
+    }
+    
+    //Tapping on marker function
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
-        let name = marker.title
+        let name = marker.title!
+        let type = marker.snippet!
         
-        for location in ConstantMap.usc_dining
+        var map_to_use = ConstantMap.usc_dining
+        if(type == "athletics")
         {
-            if(String(name!) == String(location["name"]!))
+            map_to_use = ConstantMap.usc_athletics
+        }
+        else if(type == "libraries")
+        {
+            map_to_use = ConstantMap.usc_libraries
+        }
+        else if(type == "village")
+        {
+            map_to_use = ConstantMap.usc_village
+        }
+        
+        for location in map_to_use
+        {
+            let location_map = ConstantMap.usc_map[location]!
+            if(String(name) == String(describing: location_map["name"]!))
             {
-                var code = String(describing: location["code"]!)
-                let lat = CLLocationDegrees(location["lat"]!)
-                let long = CLLocationDegrees(location["lng"]!)
-                let image_name = String(describing: location["image"]!)
-                let loc_name = String(describing: location["name"]!)
-                let coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+                let code = location
+                let lat = Double(location_map["lat"]!)
+                let long = Double(location_map["lng"]!)
+                let image_name = String(describing: location_map["image"]!)
+                let loc_name = String(describing: location_map["name"]!)
+                let content = String(describing: location_map["content"]!)
+                //let coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
                 
-                if(code == "")
-                {
-                    code = String(describing: String(name!).characters.first!)
-                }
                 //self.marker = marker
                 //marker.tracksInfoWindowChanges = true
-                self.usc_location.set_up_values(name: loc_name, address: "", abbreviation: code, id: "", coordinate: coordinate, content: marker.snippet!, image_named: image_name)
+                let coordinate = CLLocationCoordinate2D(latitude: lat as! CLLocationDegrees, longitude: long as! CLLocationDegrees)
+                self.usc_location.set_up_values(name: loc_name, address: "", abbreviation: code, id: "", coordinate: coordinate, content: content, image_named: image_name)
                 self.display_dest_usc_location_info_using_lat_long()
+                return true
             }
         }
 
@@ -159,6 +175,8 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
             move_camera_to(to: "USC")
         case 1:
             move_camera_to(to: "ME")
+        case 2:
+            move_camera_to(to: "HSC")
         default:
             break;
         }
@@ -203,6 +221,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
             print("Location not found at USC. Try Again.")
         }
         
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
@@ -211,6 +230,18 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         self.search_from_text_field()
         return true
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let search = UserDefaults.standard.string(forKey: "directory_search")
+        if((search) != nil)
+        {
+            set_default_values()
+            print("SEARCH: " + search!)
+            get_lat_long_from_dest_address_in_usc_map(word: search!)
+            UserDefaults.standard.removeObject(forKey: "directory_search")
+        }
+    }
+
     
     
     //Function that happens when the view comes into play: Include all setup code here
@@ -241,7 +272,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         //IBOutlet layering hierarchy (Order does matter!)
         self.view.insertSubview(menu_button_view, aboveSubview: self.mapView)
         self.view.insertSubview(menu, aboveSubview: self.mapView)
-        self.view.insertSubview(location_textfield, aboveSubview: self.mapView)
+        //self.view.insertSubview(location_textfield, aboveSubview: self.mapView)
         location_textfield.autocorrectionType = .no
         self.view.insertSubview(navigation_menu, aboveSubview: self.mapView)
         self.view.insertSubview(current_location_button, aboveSubview: self.mapView)
@@ -279,7 +310,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         
         // Create a CharacterSet of delimiters to parse user search input
         let separators = CharacterSet(charactersIn: ":,-, ,(,),,")
-        let trimmed_word = word.trimmed()
+        let trimmed_word = word.trimmingCharacters(in: .whitespaces)
         var search_words : [String] = trimmed_word.components(separatedBy: separators)
         
         //exclude empty words
@@ -287,7 +318,7 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
             (x) -> Bool in !x.isEmpty
         }
         
-        print(search_words)
+        //print(search_words)
         
         //check for match with building code first
         if (ConstantMap.usc_map[word.uppercased()] != nil) {
@@ -377,35 +408,15 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
         let lookup_name = dict["name"]!
         let lookup_id = dict["id"]!
         let lookup_abbreviation = matched_key
+        let lookup_lat = Double(dict["lat"]!)
+        let lookup_lng = Double(dict["lng"]!)
+        let lookup_content = dict["content"]!
+        let lookup_image = dict["image"]!
+        let coordinate = CLLocationCoordinate2D(latitude: lookup_lat as! CLLocationDegrees, longitude: lookup_lng as! CLLocationDegrees)
         
-        let address_request = (lookup_address).replacingOccurrences(of: " ", with: "+")
-        let get_request = "https://maps.googleapis.com/maps/api/geocode/json?address=\(address_request)&key=AIzaSyBIIkq2aJwHsjwujPSptKQXJeyCeQQvTjE"
-        
-        Alamofire.request(get_request).responseJSON
-            { response in
-                
-                if let JSON = response.result.value
-                {
-                    let response: [String: AnyObject] = JSON as! [String : AnyObject]
-                    let _results = (response["results"] as? Array) ?? []
-                    let results = (_results.first as? Dictionary<String, AnyObject>) ?? [:]
-                    let geometry = (results["geometry"] as? Dictionary<String, AnyObject>) ?? [:]
-                    let location = (geometry["location"] as? Dictionary<String, AnyObject>) ?? [:]
-                    
-                    let lat = location["lat"] as! CLLocationDegrees
-                    let long = location["lng"] as! CLLocationDegrees
-
-                    //place picker
-                    let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                    //let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 18.0)
-                    //self.mapView.animate(to: camera)
-                    
-                    self.usc_location.set_up_values(name: lookup_name, address: lookup_address, abbreviation: lookup_abbreviation, id: lookup_id, coordinate: coordinate, content: "", image_named: lookup_abbreviation)
-                    self.display_dest_usc_location_info_using_lat_long()
-                    self.move_camera_to(to: "DEST") // maybe change later
-                    
-                    }
-                }
+        self.usc_location.set_up_values(name: lookup_name, address: lookup_address, abbreviation: lookup_abbreviation, id: lookup_id, coordinate: coordinate, content: lookup_content, image_named: lookup_image)
+        self.display_dest_usc_location_info_using_lat_long()
+        self.move_camera_to(to: "DEST") // maybe change later
         
         
         return true
@@ -462,6 +473,80 @@ class ViewController: UIViewController,GMSMapViewDelegate,CLLocationManagerDeleg
             let camera = GMSCameraPosition.camera(withLatitude: self.usc_location.coordinate.latitude, longitude: self.usc_location.coordinate.longitude, zoom: 18.0)
             self.mapView.animate(to: camera)
         }
+        else if(to == "HSC")
+        {
+            let camera = GMSCameraPosition.camera(withLatitude: 34.0595, longitude: -118.2082, zoom: 15.0)
+            self.mapView.animate(to: camera)
+        }
+    }
+    
+    func filter(with: String)
+    {
+        move_camera_to(to: "USC")
+        set_default_values()
+        
+        if (with == "DINING")
+        {
+            for location in ConstantMap.usc_dining
+            {
+                let location_map = ConstantMap.usc_map[location]
+                let name = location_map?["name"]
+                let type = location_map?["type"]
+                let lat = CLLocationDegrees((location_map?["lat"]!)!)
+                let long = CLLocationDegrees((location_map?["lng"]!)!)
+                let marker_dining = GMSMarker(position: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
+                marker_dining.title = name
+                marker_dining.map = self.mapView
+                marker_dining.snippet = type
+            }
+        }
+        else if (with == "VILLAGE")
+        {
+            for location in ConstantMap.usc_village
+            {
+                let location_map = ConstantMap.usc_map[location]
+                let name = location_map?["name"]
+                let type = location_map?["type"]
+                let lat = CLLocationDegrees((location_map?["lat"]!)!)
+                let long = CLLocationDegrees((location_map?["lng"]!)!)
+                print(lat!)
+                let marker_village = GMSMarker(position: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
+                marker_village.title = name
+                marker_village.map = self.mapView
+                marker_village.snippet = type
+            }
+        }
+        else if (with == "ATHLETICS")
+        {
+            for location in ConstantMap.usc_athletics
+            {
+                let location_map = ConstantMap.usc_map[location]
+                let name = location_map?["name"]
+                let type = location_map?["type"]
+                let lat = CLLocationDegrees((location_map?["lat"]!)!)
+                let long = CLLocationDegrees((location_map?["lng"]!)!)
+                let marker_dining = GMSMarker(position: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
+                marker_dining.title = name
+                marker_dining.map = self.mapView
+                marker_dining.snippet = type
+            }
+        }
+        else if (with == "LIBRARIES")
+        {
+            for location in ConstantMap.usc_libraries
+            {
+                let location_map = ConstantMap.usc_map[location]
+                let name = location_map?["name"]
+                let type = location_map?["type"]
+                let lat = CLLocationDegrees((location_map?["lat"]!)!)
+                let long = CLLocationDegrees((location_map?["lng"]!)!)
+                let marker_dining = GMSMarker(position: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
+                marker_dining.title = name
+                marker_dining.map = self.mapView
+                marker_dining.snippet = type
+            }
+        }
+        
     }
     
     //make sure usc_location is set before calling this function!

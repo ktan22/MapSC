@@ -1,0 +1,516 @@
+{
+  "annenberg-cart": {
+    "title": "Annenberg Cart",
+    "content": "Grab &amp; go items, pastries and handcrafted CBTL beverages",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/annenberg_cart_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/annenberg_cart_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/annenberg_cart_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/annenberg_cart_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "ASC",
+    "center": {
+      "lat": "34.022034",
+      "lng": "-118.28615400000001"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/annenberg-cart\/",
+    "slug": "annenberg-cart",
+    "isquickservice": 1
+  },
+  "bashor-lounge": {
+    "title": "Bashor Lounge",
+    "content": "Bashor is the perfect location to impress your guests at USC. The warm ambiance with USC acclaimed sports history, features a unique foyer with sports memorabilia, an existing bar, and options for patio usage. Bashor can fit up to 80 people and has AV capabilities.",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/Bashor.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "HER",
+    "center": {
+      "lat": "34.0225539",
+      "lng": "-118.286786"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/bashor-lounge\/"
+  },
+  "cafe-84": {
+    "title": "Caf\u00e9 84",
+    "content": "Action and stations featuring healthy options served buffet-style, full salad bar, homemade soups and LSO station (all-you-care-to-eat). Part of the meal plan program, but also open for cash and credit card purchase.",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/Cafe84.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "KOH",
+    "center": {
+      "lat": "34.024759",
+      "lng": "-118.28797500000002"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/cafe-84\/"
+  },
+  "california-pizza-kitchen": {
+    "title": "California Pizza Kitchen",
+    "content": "Hearth-baked CPK signature pizzas, pasta, salads, soups and sandwiches",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/cal-pizza-kitchen.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/cal-pizza-kitchen.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/cal-pizza-kitchen-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/cal-pizza-kitchen-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "TCC",
+    "center": {
+      "lat": "34.020046",
+      "lng": "-118.28644500000001"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/california-pizza-kitchen\/",
+    "slug": "california-pizza-kitchen",
+    "isquickservice": 1
+  },
+  "cammilleri_cafe": {
+    "title": "Cammilleri Caf\u00e9",
+    "content": "A wide variety of grab and go items including gourmet sandwiches, salads, pastries and premium coffee and specialty teas.",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2016\/06\/CAM_Featured_700x294-220x110.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "",
+    "center": {
+      "lat": "34.01875657645568",
+      "lng": "-118.28380570632936"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/cammilleri_cafe\/",
+    "slug": "cammilleri_cafe",
+    "isquickservice": 1
+  },
+  "coffee-bean-tea-leaf": {
+    "title": "Coffee Bean &#038; Tea Leaf",
+    "content": "Carefully handcrafted coffees, teas, blended beverages, pastries and grab &amp; go items",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/coffee_bean_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/coffee_bean_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/coffee_bean_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/coffee_bean_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "TCC",
+    "center": {
+      "lat": "34.020046",
+      "lng": "-118.28644500000001"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/coffee-bean-tea-leaf\/",
+    "slug": "coffee-bean-tea-leaf",
+    "isquickservice": 1
+  },
+  "coffee-bean-tea-leaf-2": {
+    "title": "Coffee Bean &#038; Tea Leaf (Cinema)",
+    "content": "",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/coffee_bean_upc1.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/coffee_bean_upc1.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/coffee_bean_upc1-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/coffee_bean_upc1-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "SCA",
+    "center": {
+      "lat": "34.0233381",
+      "lng": "-118.28719849999999"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/coffee-bean-tea-leaf-2\/",
+    "slug": "coffee-bean-tea-leaf-2",
+    "isquickservice": 1
+  },
+  "davidson-conference-center": {
+    "title": "Davidson Conference Center (Vineyard Room)",
+    "content": "Located within the Davidson Conference Center, the Vineyard Room is a great location for a social or private gathering.",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/DavidsonConferenceCenter.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "DCC",
+    "center": {
+      "lat": "34.0216459",
+      "lng": "-118.2806703"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/davidson-conference-center\/"
+  },
+  "everybodys-kitchen": {
+    "title": "Everybody&#8217;s Kitchen",
+    "content": "Home style menu served buffet-style format as well as exhibition-style cooking, full salad &amp; sandwich bar (all-you-care-to eat).  Part of the meal plan program, but also open for cash and credit card purchase.",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/EVK.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "BSR",
+    "center": {
+      "lat": "34.021389",
+      "lng": "-118.28212289999999"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/everybodys-kitchen\/"
+  },
+  "fertitta-cafe": {
+    "title": "Fertitta Caf\u00e9",
+    "content": "",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2016\/05\/sushi-220x110.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "ASC",
+    "center": {
+      "lat": "34.022034",
+      "lng": "-118.28615400000001"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/fertitta-cafe\/",
+    "slug": "fertitta-cafe",
+    "isquickservice": 1
+  },
+  "law-school-cafe": {
+    "title": "Law School Caf\u00e9",
+    "content": "Salmon bowls, Boba Tea, sandwiches, salads, grab &amp; go items and Peet\u2019s coffee beverages",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/law_school_cafe_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/law_school_cafe_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/law_school_cafe_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/law_school_cafe_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "LAW",
+    "center": {
+      "lat": "34.018762",
+      "lng": "-118.28453400000001"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/law-school-cafe\/",
+    "slug": "law-school-cafe",
+    "isquickservice": 1
+  },
+  "lemonade": {
+    "title": "Lemonade",
+    "content": "Seasonal California comfort food featuring marketplace salads, sandwiches, slow simmered stews, desserts and delicious lemonade flavors",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/lemonade_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/lemonade_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/lemonade_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/lemonade_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "TCC",
+    "center": {
+      "lat": "34.020046",
+      "lng": "-118.28644500000001"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/lemonade\/",
+    "slug": "lemonade",
+    "isquickservice": 1
+  },
+  "literatea": {
+    "title": "Literatea",
+    "content": "Serving tea, coffee, grab &amp; go items and the best oatmeal on campus!",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/literatea_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/literatea_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/literatea_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/literatea_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "DML",
+    "center": {
+      "lat": "34.020158",
+      "lng": "-118.283657"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/literatea\/",
+    "slug": "literatea",
+    "isquickservice": 1
+  },
+  "little-galen": {
+    "title": "Little Galen",
+    "content": "",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/little_galen_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/little_galen_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/little_galen_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/little_galen_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "GAP",
+    "center": {
+      "lat": "34.02096",
+      "lng": "-118.27992499999999"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/little-galen\/",
+    "slug": "little-galen",
+    "isquickservice": 1
+  },
+  "mckays": {
+    "title": "McKay&#8217;s",
+    "content": "Full Service Restaurant, Fine Dining \u2013 Fresh salads, tasty appetizers, fish\/poultry\/steak or pasta entr\u00e9es, desserts",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/03\/mckays.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "RMH",
+    "center": {
+      "lat": "34.019569",
+      "lng": "-118.28098599999998"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/mckays\/"
+  },
+  "moreton-fig": {
+    "title": "Moreton Fig",
+    "content": "Full Service Restaurant, Fine Dining \u2013 Farm-to-Table gourmet, California cuisine, full bar with incredible California wine selections",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/03\/moreton-fig.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "TCC",
+    "center": {
+      "lat": "34.019853",
+      "lng": "-118.28599500000001"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/moreton-fig\/"
+  },
+  "nekter-at-shop-cafe": {
+    "title": "Nekter at Shop Caf\u00e9",
+    "content": "Handcrafted smoothies, juices, pastries, grab &amp; go items and DRNK coffee beverages. Bypass the line\u2026.pre-order using Tapingo!",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/shop_cafe_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/shop_cafe_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/shop_cafe_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/shop_cafe_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "HAR",
+    "center": {
+      "lat": "34.01886500665938",
+      "lng": "-118.28776760118865"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/nekter-at-shop-cafe\/",
+    "slug": "nekter-at-shop-cafe",
+    "isquickservice": 1
+  },
+  "panda-express": {
+    "title": "Panda Express",
+    "content": "Variety of American Chinese entr\u00e9es paired with friend rice, steamed rice, chow mein or mixed veggies",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/panda_express_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/panda_express_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/panda_express_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/panda_express_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "TCC",
+    "center": {
+      "lat": "34.020046",
+      "lng": "-118.28644500000001"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/panda-express\/",
+    "slug": "panda-express",
+    "isquickservice": 1
+  },
+  "panda-express-2": {
+    "title": "Panda Express",
+    "content": "WOK ON OVER!\r\n\r\nPanda Express combines classic Chinese flavors and fresh ingredients in a popular dining experience that has become legendary. ",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/panda_express_hsc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/panda_express_hsc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/panda_express_hsc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/panda_express_hsc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "SRH",
+    "center": {
+      "lat": "34.0606272",
+      "lng": "-118.20572170000003"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/panda-express-2\/",
+    "slug": "panda-express-2",
+    "isquickservice": 1
+  },
+  "parkside": {
+    "title": "Parkside Restaurant &#038; Grill",
+    "content": "Trend-current International cuisine in an exhibition-style format served buffet style (all-you-care-to eat).",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/Parkside.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "IRC",
+    "center": {
+      "lat": "34.019375",
+      "lng": "-118.29096800000002"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/parkside\/"
+  },
+  "hsc-grill": {
+    "title": "Plaza Marketplace",
+    "content": "Plaza Marketplace specializes in quick and healthy dining for easy pick up. Menus feature made to order Sandwich and Freshly Tossed Salad stations and our new Healthy Corner and \u201cSeeds\u201d breakfast items.",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/plaza_marketplace_hsc-220x110.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "SRH",
+    "center": {
+      "lat": "34.0600583",
+      "lng": "-118.20605060000003"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/hsc-grill\/",
+    "slug": "hsc-grill",
+    "isquickservice": 1
+  },
+  "popovich-cafe": {
+    "title": "Popovich Caf\u00e9",
+    "content": "Mediterranean inspired sandwiches, wraps, salads, Portos pastries and baked items, Sambazon Acai bowls and illy coffee &amp; handcrafted beverages.",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/IMG_9010-2-220x110.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "JKP",
+    "center": {
+      "lat": "34.0187469",
+      "lng": "-118.2829582"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/popovich-cafe\/",
+    "slug": "popovich-cafe",
+    "isquickservice": 1
+  },
+  "einstein-bros-bagels": {
+    "title": "Qwench Juice Bar",
+    "content": "Qwench is an innovative and evolutionary response to an emergent food trend focused on fresh ingredients natural tastes and flavors, elevated nutrition, and powerful superfoods. To achieve thirst-quenching taste, we use raw fruit and vegetable juice, always squeezed-to-order.",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/Qwench-220x110.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "ZNI",
+    "center": {
+      "lat": "34.0619767",
+      "lng": "-118.20362469999998"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/einstein-bros-bagels\/",
+    "slug": "einstein-bros-bagels",
+    "isquickservice": 1
+  },
+  "ronald-tutor-campus-center": {
+    "title": "Ronald Tutor Campus Center",
+    "content": "The Trojan Grand Ballroom, appointed with close to 9,000 square feet of pillar-free space is the ideal location for meetings, conferences and banquets.",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/RTCC.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "RTCC",
+    "center": {
+      "lat": "34.020046",
+      "lng": "-118.28644500000001"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/ronald-tutor-campus-center\/"
+  },
+  "rosso-oros": {
+    "title": "Rosso Oro&#8217;s",
+    "content": "New York-style thin crust pizza, lasagna, salads, beer and wine",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/03\/Rossos-2-220x110.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "",
+    "center": {
+      "lat": "34.0199032",
+      "lng": "-118.2805194"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/rosso-oros\/",
+    "slug": "rosso-oros",
+    "isquickservice": 1
+  },
+  "seeds": {
+    "title": "Seeds",
+    "content": "Handcrafted, made-to-order sandwiches &amp; salads, gourmet sausages, rotisserie, desserts and full market",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/seeds_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/seeds_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/seeds_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/seeds_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "TCC",
+    "center": {
+      "lat": "34.020046",
+      "lng": "-118.28644500000001"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/seeds\/",
+    "slug": "seeds",
+    "isquickservice": 1
+  },
+  "seeds-marketplace": {
+    "title": "Seeds Marketplace",
+    "content": "Located on the ground floor of the Soto Building, Seeds Marketplace (aka Seeds North) offers several UPC favorites with specialty items just for HSC. Delightfully delicious salads, sandwiches and smoothies are all handcrafted and customizable.",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/seeds_hsc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/seeds_hsc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/seeds_hsc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/seeds_hsc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "SSB",
+    "center": {
+      "lat": "34.0654543",
+      "lng": "-118.19732579999999"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/seeds-marketplace\/",
+    "slug": "seeds-marketplace",
+    "isquickservice": 1
+  },
+  "starbucks": {
+    "title": "Starbucks",
+    "content": "USC is proud to offer the world\u2019s best known coffee, prepared just the way you like it. Non-fat, no foam, half-caf vanilla late? No problem.",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/starbucks_hsc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/starbucks_hsc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/starbucks_hsc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/starbucks_hsc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "SRH",
+    "center": {
+      "lat": "34.0606272",
+      "lng": "-118.20572170000003"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/starbucks\/",
+    "slug": "starbucks",
+    "isquickservice": 1
+  },
+  "starbucks-at-trojan-grounds": {
+    "title": "Starbucks at Trojan Grounds",
+    "content": "Full line of Starbucks coffee beverages, premium Tazo\u00ae Teas, fine pastries and other delectables.  Bypass the line\u2026.pre-order using Tapingo!",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/starbucks_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/starbucks_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/starbucks_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/starbucks_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "BSR",
+    "center": {
+      "lat": "34.0212974",
+      "lng": "-118.28259049999997"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/starbucks-at-trojan-grounds\/",
+    "slug": "starbucks-at-trojan-grounds",
+    "isquickservice": 1
+  },
+  "the-cafe": {
+    "title": "The Caf\u00e9",
+    "content": "",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/annenberg_cafe_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/annenberg_cafe_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/annenberg_cafe_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/annenberg_cafe_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "ASC",
+    "center": {
+      "lat": "34.020777",
+      "lng": "-118.28697599999998"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/the-cafe\/",
+    "slug": "the-cafe",
+    "isquickservice": 1
+  },
+  "the-edmondson-catering": {
+    "title": "The Edmondson",
+    "content": "The Edmondson has two private event rooms for small meetings and events. Full buy-out of the restaurant is possible both before lunch service and on the weekends. ",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/Edmondson.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "EFC",
+    "center": {
+      "lat": "34.0606272",
+      "lng": "-118.20572170000003"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/the-edmondson-catering\/"
+  },
+  "the-edmondson": {
+    "title": "The Edmondson (Health Sciences Campus)",
+    "content": "The Edmondson Faculty Center is based on a farm-to-fork concept created by USC Hospitality located at the Health Science Campus.",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/edmonson.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "EFC",
+    "center": {
+      "lat": "34.0606272",
+      "lng": "-118.20572170000003"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/the-edmondson\/"
+  },
+  "the-habit-burger-grill": {
+    "title": "The Habit Burger Grill",
+    "content": "Charbroiled burgers, sandwiches, salads, fries and shakes",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/habit_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/habit_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/habit_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/habit_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "TCC",
+    "center": {
+      "lat": "34.020046",
+      "lng": "-118.28644500000001"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/the-habit-burger-grill\/",
+    "slug": "the-habit-burger-grill",
+    "isquickservice": 1
+  },
+  "the-lab-gastropub": {
+    "title": "The Lab Gastropub",
+    "content": "Full Service Restaurant \u2013 Gastropub Classics",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/03\/the-lab.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "",
+    "center": {
+      "lat": "34.019907",
+      "lng": "-118.28056700000002"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/the-lab-gastropub\/"
+  },
+  "town-gown": {
+    "title": "Town &#038; Gown",
+    "content": "Town and Gown is the premier ballroom on the USC campus and is the preferred location for lunches, galas and celebrations (including weddings!).",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/TownGown.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "TGF",
+    "center": {
+      "lat": "34.019116",
+      "lng": "-118.28424799999999"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/town-gown\/"
+  },
+  "traditions": {
+    "title": "Traditions",
+    "content": "Bar and Grill \u2013 Appetizers, burgers, sandwiches and, full bar with a great selection of on-tap and bottled beers.",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/03\/traditions.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" \/>",
+    "code": "TCC",
+    "center": {
+      "lat": "34.019964",
+      "lng": "-118.28616199999999"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/traditions\/"
+  },
+  "tutor-hall-cafe": {
+    "title": "Tutor Hall Caf\u00e9",
+    "content": "International flavors \u2013 Bahn Mi sandwiches, noodle bowls, Indian cuisine, grab &amp; go items and DRNK coffee beverages",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/tutor_hall_cafe_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/tutor_hall_cafe_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/tutor_hall_cafe_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/tutor_hall_cafe_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "RTH",
+    "center": {
+      "lat": "34.020035",
+      "lng": "-118.289718"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/tutor-hall-cafe\/",
+    "slug": "tutor-hall-cafe",
+    "isquickservice": 1
+  },
+  "university-club": {
+    "title": "University Club",
+    "content": "Full Service Restaurant, Fine Dining \u2013 Members\u2019 only",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2016\/06\/UClub_Dining_Thumbnail-220x110.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2016\/06\/UClub_Dining_Thumbnail-220x110.jpg 220w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2016\/06\/UClub_Dining_Thumbnail.jpg 270w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "",
+    "center": {
+      "lat": "34.02260130831641",
+      "lng": "-118.28375940412138"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/university-club\/"
+  },
+  "university-club-catering": {
+    "title": "University Club",
+    "content": "The University Club is appointed with seven meeting rooms to accommodate private events.  ",
+    "image": "<img width=\"220\" height=\"110\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2016\/06\/UClub_Catering_Thumbnail-220x110.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2016\/06\/UClub_Catering_Thumbnail-220x110.jpg 220w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2016\/06\/UClub_Catering_Thumbnail.jpg 270w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "",
+    "center": {
+      "lat": "34.02259471722757",
+      "lng": "-118.28378471116946"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/university-club-catering\/"
+  },
+  "university-village": {
+    "title": "University Village",
+    "content": "",
+    "image": "",
+    "code": "",
+    "center": {
+      "lat": "",
+      "lng": ""
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/university-village\/"
+  },
+  "urbnmrkt": {
+    "title": "URBNMRKT",
+    "content": "Daily salad, sandwich and entr\u00e9e specials, grab &amp; go items and Peet\u2019s Coffee",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/urbnmrkt_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/urbnmrkt_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/urbnmrkt_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/urbnmrkt_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "CAL",
+    "center": {
+      "lat": "34.0190482",
+      "lng": "-118.27638589999998"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/urbnmrkt\/",
+    "slug": "urbnmrkt",
+    "isquickservice": 1
+  },
+  "verde": {
+    "title": "Verde",
+    "content": "Made to order burritos and bowls using fresh grilled proteins and fresh ingredients",
+    "image": "<img width=\"220\" height=\"92\" src=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/verde_upc.jpg\" class=\"attachment-map_overlay size-map_overlay wp-post-image\" alt=\"\" srcset=\"http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/verde_upc.jpg 700w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/verde_upc-300x126.jpg 300w, http:\/\/hospitality.usc.edu\/wp-content\/uploads\/2015\/05\/verde_upc-654x275.jpg 654w\" sizes=\"(max-width: 220px) 100vw, 220px\" \/>",
+    "code": "TCC",
+    "center": {
+      "lat": "34.020046",
+      "lng": "-118.28644500000001"
+    },
+    "buildingurl": "http:\/\/hospitality.usc.edu\/dining_locations\/verde\/",
+    "slug": "verde",
+    "isquickservice": 1
+  }
+}
